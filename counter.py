@@ -1,9 +1,32 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+import csv
 
-startingYear = 2017
-endingYear = 2037
-frames = 500
+def read_csv_file(file_path, string, items):
+    if items == 1:
+        with open(file_path, 'r', newline='') as f:
+            reader = csv.reader(f)
+
+            for row in reader:
+                if not string:
+                    return int(row[0])
+                else:
+                    return row[0]
+
+    else:
+        results = []
+        with open(file_path, 'r', newline='') as f:
+            reader = csv.reader(f)
+
+            for row in reader:
+                for item in row:
+                    results.append(float(item))
+
+        return results
+
+startingYear = read_csv_file('startingYear.csv', False, 1)
+endingYear = read_csv_file('endingYear.csv', False, 1)
+frames = read_csv_file('frames.csv', False, 1)
 
 # Function to update the text
 def update_text(i):
