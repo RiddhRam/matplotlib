@@ -11,6 +11,11 @@ def update_text(i):
     current_year = startingYear + int(i/frames * (endingYear - startingYear)) + 1
     text.set_text(str(current_year))
 
+    # If greater than 25, it will start printing. The first 25 frames is the first year which we skip.
+    # Use this to align the legend with the video
+    if (i > 25):
+        print(i)
+
     return text,
 
 # Create a figure and axis
