@@ -2,11 +2,11 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import numpy as np
 from scipy.interpolate import interp1d
-from matplotlib.ticker import FuncFormatter
-from matplotlib.ticker import MaxNLocator
+from matplotlib.ticker import FuncFormatter, MaxNLocator
 
 startingYear = 2017
 endingYear = 2037
+frames = 500
 
 # Original data points
 x = np.linspace(startingYear, endingYear, 21)
@@ -22,22 +22,17 @@ def interpolate_data(x, y, num_points):
     return x_new, y_new
 
 # Interpolate the data to have more points
-num_interpolated_points = 500
+num_interpolated_points = frames
 x_interp, y1_interp = interpolate_data(x, y1, num_interpolated_points)
 _, y2_interp = interpolate_data(x, y2, num_interpolated_points)
 _, y3_interp = interpolate_data(x, y3, num_interpolated_points)
 
 fig, ax = plt.subplots()
-line1, = ax.plot([], [], lw=2, label='2017 Merecedes-AMG E63S', color='#4ca0d7')
-line2, = ax.plot([], [], lw=2, label='2017 BMW M5', color='r')
-line3, = ax.plot([], [], lw=2, label='2017 Audi RS7', color='g')
+line1, = ax.plot(x_interp, y1_interp, lw=2, label='2017 Merecedes-AMG E63S', color='#4ca0d7')
+line2, = ax.plot(x_interp, y2_interp, lw=2, label='2017 BMW M5', color='r')
+line3, = ax.plot(x_interp, y3_interp, lw=2, label='2017 Audi RS7', color='g')
 
 ax.legend()
-
-# Text annotations for each line
-text1 = ax.text(startingYear, 0, '', fontsize=10, color='#000')
-text2 = ax.text(startingYear, 0, '', fontsize=10, color='#000')
-text3 = ax.text(startingYear, 0, '', fontsize=10, color='#000')
 
 # Set labels for the axes
 ax.set_xlabel('Year')
@@ -48,53 +43,27 @@ formatter = FuncFormatter(lambda x, _: f'${x:,.0f}')
 ax.yaxis.set_major_formatter(formatter)
 
 # Ensure x-axis shows only integers
-ax.xaxis.set_major_locator(plt.MaxNLocator(10, integer=True))
+ax.xaxis.set_major_locator(MaxNLocator(6, integer=True))
 
 # Initialization function
 def init():
-    ax.set_xlim(startingYear, startingYear+1)
+    #ax.set_xlim(startingYear, startingYear+1)
     ax.set_ylim(0, 125000)
-    line1.set_data([], [])
-    line2.set_data([], [])
-    line3.set_data([], [])
-    '''text1.set_position((startingYear, 1000))
-    text3.set_position((startingYear, 1000))
-    text3.set_position((startingYear, 1000))'''
-    #return line1, text1
+
     return line1, line2, line3
-    return line1, line2, line3, text1, text2, text3
 
 # Animation function
 def animate(i):
+    # Animate the next frame for the lines
     line1.set_data(x_interp[:i], y1_interp[:i])
     line2.set_data(x_interp[:i], y2_interp[:i])
     line3.set_data(x_interp[:i], y3_interp[:i])
-    
-    if i > 0:
-        '''text1.set_position((min(x_interp[i-1], 2030), y1_interp[i-1]))
-        text2.set_position((min(x_interp[i-1], 2033), y2_interp[i-1]))
-        text3.set_position((min(x_interp[i-1], 2033), y3_interp[i-1]))'''
-    if i < len(x_interp):
-        '''text1.set_text('2017 Merecedes-AMG E63S')
-        text2.set_text('2017 BMW M5')
-        text3.set_text('2017 Audi RS7')'''
 
+    # Animate the next frame for the x axis
     if i >= 1:
         ax.set_xlim(startingYear, x_interp[i])
 
-    '''if i >= 1:
-        timeDifference= int(x_interp[i]) - (startingYear+6)
-
-        distance = timeDifference
-
-        years_to_display = np.arange(startingYear, endingYear+1, 2)
-        ax.set_xticks(years_to_display)
-        ax.figure.canvas.draw()'''
-    
-
-    #return line1, text1
     return line1, line2, line3
-    return line1, line2, line3, text1, text2, text3
 
 # Create animation
 ani = animation.FuncAnimation(fig, animate, init_func=init, frames=num_interpolated_points, interval=1000/60)
