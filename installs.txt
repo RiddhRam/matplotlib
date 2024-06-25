@@ -1,0 +1,12 @@
+Mac:
+install ffmpeg with homebrew
+
+brew install python then brew install pipx
+then install python packages using pipx
+
+Windows: 
+Install ffmpeg
+
+install python packages
+
+python packages needed: moviepy, numpy, matplotlib, Pillow (version 9.5.0)

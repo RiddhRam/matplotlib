@@ -42,6 +42,9 @@ y2_interp = read_csv_file('y2_interp.csv', False, 2)
 y3_interp = read_csv_file('y3_interp.csv', False, 2)
 
 fig, ax = plt.subplots()
+
+fig.set_size_inches(8, 5)  # Adjust the numbers as needed
+
 line1, = ax.plot(x_interp, y1_interp, lw=2, label=car1, color='#4ca0d7')
 line2, = ax.plot(x_interp, y2_interp, lw=2, label=car2, color='r')
 line3, = ax.plot(x_interp, y3_interp, lw=2, label=car3, color='g')
@@ -80,4 +83,9 @@ def animate(i):
 # Create animation
 ani = animation.FuncAnimation(fig, animate, init_func=init, frames=frames, interval=1000/60)
 
-plt.show()
+writervideo = animation.FFMpegWriter(fps=60)
+
+# Save the animation
+ani.save('GraphRaw.mp4', fps=60, extra_args=['-vcodec', 'libx264'])
+
+plt.close()

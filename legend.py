@@ -52,11 +52,6 @@ def update(i):
 
     sorted_values = sorted(values, key=lambda x: x[1], reverse=True)
 
-    # If greater than 25, it will start printing. The first 25 frames is the first year which we skip.
-    # Use this to align the legend with the video
-    if (i > 25):
-        print(i)
-
     for index, val in enumerate(sorted_values):
         ax.text(0.5, 0.6-0.2*index, val[0], color=val[2], ha='center', fontsize=15)
 
@@ -65,8 +60,10 @@ def update(i):
     ax.set_xlim([-1, 1])
     ax.set_ylim([-1, 1])
 
-
 # Create animation
 ani = FuncAnimation(fig, update, frames=frames, interval=1000/60)
 
-plt.show()
+# Save the animation
+ani.save("LegendRaw.mp4", fps=60, extra_args=['-vcodec', 'libx264'])
+
+plt.close()
