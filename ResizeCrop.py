@@ -14,8 +14,8 @@ counterX2, counterY2 = 850, 550  # bottom-right corner - counter
 cropped_CounterClip = CounterClip.crop(x1=counterX1, y1=counterY1, x2=counterX2, y2=counterY2)
 
 # Resizing
-resized_GraphClip = GraphClip.resize(width=425, height=755)
-resized_LegendClip = cropped_LegendClip.resize(width=275)
+resized_GraphClip = GraphClip.resize(width=929)
+resized_LegendClip = cropped_LegendClip.resize(width=250)
 resized_CounterClip = cropped_CounterClip.resize(width=151)
 
 # Writing
@@ -23,4 +23,4 @@ resized_CounterClip = cropped_CounterClip.resize(width=151)
 
 resized_LegendClip.write_videofile("Legend.mp4")
 
-#resized_CounterClip.write_videofile("Counter.mp4")
+resized_CounterClip.write_videofile("Counter.mp4")

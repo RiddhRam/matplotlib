@@ -25,7 +25,7 @@ def read_csv_file(file_path, string, items):
 
         return results
 
-maximumY = 95000
+maximumY = 57000
 
 startingYear = read_csv_file('startingYear.csv', False, 1)
 endingYear = read_csv_file('endingYear.csv', False, 1)
@@ -43,7 +43,7 @@ y3_interp = read_csv_file('y3_interp.csv', False, 2)
 
 fig, ax = plt.subplots()
 
-fig.set_size_inches(8, 5)  # Adjust the numbers as needed
+fig.set_size_inches(8, 6)  # Adjust the numbers as needed
 
 line1, = ax.plot(x_interp, y1_interp, lw=2, label=car1, color='#4ca0d7')
 line2, = ax.plot(x_interp, y2_interp, lw=2, label=car2, color='r')
