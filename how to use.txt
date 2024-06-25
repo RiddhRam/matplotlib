@@ -1,0 +1,8 @@
+Copy data from spreadsheets and change other values in interoplate.py.
+
+Then run graph.py, counter.py and legend.py.
+In graph.py the maximumY var may need to be changed sometimes. 
+
+Then run ResizeCrop.py, then run VideoMaker.py. 
+
+Then import video into export and add last few frames (Prices at the end) and export.
