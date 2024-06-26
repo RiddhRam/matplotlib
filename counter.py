@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+import matplotlib.patheffects as path_effects
 import csv
 
 def read_csv_file(file_path, string, items):
@@ -40,19 +41,25 @@ def update_text(i):
 fig, ax = plt.subplots()
 
 # Set up the plot with a white background and black text
-fig.patch.set_facecolor('white')
-ax.set_facecolor('white')
-ax.set_xlim(0, 1)
-ax.set_ylim(0, 1)
+fig.patch.set_facecolor('#282c44')
 ax.axis('off')
 
 # Initialize the text element
-text = ax.text(0.5, 0.5, startingYear, fontsize=50, ha='center', va='center', color='black')
+text = ax.text(0.5, 0.5, startingYear, fontsize=50, ha='center', va='center', color='white')
 
 # Create animation
 ani = animation.FuncAnimation(fig, update_text, frames=frames, interval=1000/60, blit=True)
 
+# Add outline
+text.set_path_effects([
+        #path_effects.Stroke(linewidth=3.5, foreground="#4ca0d7"),
+        #path_effects.SimpleLineShadow(offset=(1, -1), linewidth=1.5, alpha=0.5),
+        path_effects.Normal(),
+        #path_effects.withStroke(linewidth=3, foreground='white'),
+        #path_effects.SimplePatchShadow(offset=(1, -1), alpha=0.8)
+    ])
+
 # Save the animation
 ani.save('CounterRaw.mp4', fps=60, extra_args=['-vcodec', 'libx264'])
 
-plt.close()
+#plt.show()

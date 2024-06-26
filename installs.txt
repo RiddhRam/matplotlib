@@ -1,3 +1,7 @@
+NOTES:
+After running graph.py, the x-axis might still be labeled as 'X', 
+this is fixed after running VideoMaker.py since it draws the correct label over it
+
 Mac:
 install ffmpeg with homebrew
 
@@ -9,4 +13,6 @@ Install ffmpeg
 
 install python packages
 
-python packages needed: moviepy, numpy, matplotlib, Pillow (version 9.5.0)
+python packages needed: moviepy, numpy, matplotlib, Pillow (version 9.5.0), 
+
+Format if I used python or brew to install: ImageWick

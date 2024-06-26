@@ -32,6 +32,10 @@ car1 = read_csv_file('car1.csv', True, 1)
 car2 = read_csv_file('car2.csv', True, 1)
 car3 = read_csv_file('car3.csv', True, 1)
 
+car1Color = read_csv_file('car1Color.csv', True, 1)
+car2Color = read_csv_file('car2Color.csv', True, 1)
+car3Color = read_csv_file('car3Color.csv', True, 1)
+
 # Original data points
 x_interp = read_csv_file('x_interp.csv', False, 2)
 y1_interp = read_csv_file('y1_interp.csv', False, 2)
@@ -41,19 +45,31 @@ y3_interp = read_csv_file('y3_interp.csv', False, 2)
 # Initialize a figure and axis
 fig, ax = plt.subplots()
 
+fig.patch.set_facecolor('#282c44')
+
 # Function to update the plot
 def update(i):
-    ax.clear()  # Clear previous plot
+    # Clear previous plot
+    ax.clear()  
+
+    # Update the data for the new frame
     car1Val = y1_interp[i]
     car2Val = y2_interp[i]
     car3Val = y3_interp[i]
     
-    values = [(car1, car1Val, '#4ca0d7'), (car2, car2Val, 'r'), (car3, car3Val, 'g')]
+    values = [(car1, car1Val, car1Color), (car2, car2Val, car2Color), (car3, car3Val, car3Color)]
 
     sorted_values = sorted(values, key=lambda x: x[1], reverse=True)
 
     for index, val in enumerate(sorted_values):
-        ax.text(0.5, 0.6-0.2*index, val[0], color=val[2], ha='center', fontsize=15)
+        # Color box, it still needs text so it matches the length of the text
+        ax.text(0.5, 0.6-0.2*index+0.004, val[0], color=val[2], ha='center', 
+                fontsize=17, alpha=0, transform=ax.transAxes, 
+                bbox=dict(facecolor=val[2], alpha=0.2, boxstyle='round,pad=0.1'))
+
+        # Main text
+        ax.text(0.5, 0.6-0.2*index, val[0], color=val[2], ha='center', fontsize=17,
+                            transform=ax.transAxes)
 
 
     ax.axis('off')  # Turn off axis
@@ -66,4 +82,4 @@ ani = FuncAnimation(fig, update, frames=frames, interval=1000/60)
 # Save the animation
 ani.save("LegendRaw.mp4", fps=60, extra_args=['-vcodec', 'libx264'])
 
-plt.close()
+#plt.show()

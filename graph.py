@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib.ticker import FuncFormatter, MaxNLocator
+import pandas as pd
 import csv
 
 def read_csv_file(file_path, string, items):
@@ -35,57 +36,97 @@ car1 = read_csv_file('car1.csv', True, 1)
 car2 = read_csv_file('car2.csv', True, 1)
 car3 = read_csv_file('car3.csv', True, 1)
 
+car1Color = read_csv_file('car1Color.csv', True, 1)
+car2Color = read_csv_file('car2Color.csv', True, 1)
+car3Color = read_csv_file('car3Color.csv', True, 1)
+
 # Original data points
 x_interp = read_csv_file('x_interp.csv', False, 2)
 y1_interp = read_csv_file('y1_interp.csv', False, 2)
 y2_interp = read_csv_file('y2_interp.csv', False, 2)
 y3_interp = read_csv_file('y3_interp.csv', False, 2)
 
+plt.style.use({"axes.facecolor": "#282c44"})
+'''Available styles:
+['Solarize_Light2', '_classic_test_patch', '_mpl-gallery', '_mpl-gallery-nogrid', 'bmh', 'classic', 'dark_background', 
+'fast', 'fivethirtyeight', 'ggplot', 'grayscale', 'seaborn-v0_8', 'seaborn-v0_8-bright', 'seaborn-v0_8-colorblind', 
+'seaborn-v0_8-dark', 'seaborn-v0_8-dark-palette', 'seaborn-v0_8-darkgrid', 'seaborn-v0_8-deep', 'seaborn-v0_8-muted', 
+'seaborn-v0_8-notebook', 'seaborn-v0_8-paper', 'seaborn-v0_8-pastel', 'seaborn-v0_8-poster', 'seaborn-v0_8-talk', 
+'seaborn-v0_8-ticks', 'seaborn-v0_8-white', 'seaborn-v0_8-whitegrid', 'tableau-colorblind10']'''
+
 fig, ax = plt.subplots()
 
-fig.set_size_inches(8, 6)  # Adjust the numbers as needed
+# Size of the graph in inches
+fig.set_size_inches(8, 6)
 
-line1, = ax.plot(x_interp, y1_interp, lw=2, label=car1, color='#4ca0d7')
-line2, = ax.plot(x_interp, y2_interp, lw=2, label=car2, color='r')
-line3, = ax.plot(x_interp, y3_interp, lw=2, label=car3, color='g')
+fig.patch.set_facecolor('#282c44')
 
-# Set labels for the axes
-ax.set_xlabel('Year')
-ax.set_ylabel('Price')
+# Adjust tick labels color
+ax.tick_params(axis='x', colors='white')
+ax.tick_params(axis='y', colors='white')
+
+# Set the border color of the plot
+ax.spines['bottom'].set_color('white')
+ax.spines['top'].set_color('white')
+ax.spines['left'].set_color('white')
+ax.spines['right'].set_color('white')
+
+# Colors for the lines
+colors = [
+    car1Color,  # Car 1
+    car2Color,  # Car 2
+    car3Color,  # Car 3
+]
+
+# Combine into a data frame and then we will plot it
+df = pd.DataFrame({car1: y1_interp, car2: y2_interp, car3: y3_interp, 'x':x_interp})
 
 # Format the y-axis labels to show the dollar sign
 formatter = FuncFormatter(lambda x, _: f'${x:,.0f}')
-ax.yaxis.set_major_formatter(formatter)
-
-# Ensure x-axis shows only integers
-ax.xaxis.set_major_locator(MaxNLocator(6, integer=True))
-
-# Initialization function
-def init():
-    #ax.set_xlim(startingYear, startingYear+1)
-    ax.set_ylim(0, maximumY)
-
-    return line1, line2, line3
 
 # Animation function
 def animate(i):
-    # Animate the next frame for the lines
-    line1.set_data(x_interp[:i], y1_interp[:i])
-    line2.set_data(x_interp[:i], y2_interp[:i])
-    line3.set_data(x_interp[:i], y3_interp[:i])
+    # Set data for the next frame for the lines
+    df = pd.DataFrame({car1: y1_interp[:i], car2: y2_interp[:i], car3: y3_interp[:i], 'x':x_interp[:i]})
 
-    # Animate the next frame for the x axis
-    if i >= 1:
-        ax.set_xlim(startingYear, x_interp[i])
+    # Clear the previous plot to reduce lag
+    ax.clear()  
 
-    return line1, line2, line3
+    # Redraw the plot with updated data
+    df.plot(x='x', y=[car1, car2, car3], linewidth=3, ax=ax, legend=False, color=colors)
+
+    # Set the labels
+    ax.set_xlabel('Year', color='white')
+    ax.set_ylabel('Price', color='white')
+
+    # Format the prices to have a $ at the start
+    ax.yaxis.set_major_formatter(formatter)
+
+    # Ensure x-axis shows only integers
+    ax.xaxis.set_major_locator(MaxNLocator(6, integer=True))
+
+    # Add the glow to the lines
+    n_lines = 10
+    diff_linewidth = 1.25
+    alpha_value = 0.03
+    for n in range(1, n_lines):
+        df.plot(
+                x='x', 
+                y=[car1, car2, car3],
+                linewidth=3+(diff_linewidth*n),
+                alpha=alpha_value,
+                legend=False,
+                ax=ax,
+                color=colors)
+
+    return df
 
 # Create animation
-ani = animation.FuncAnimation(fig, animate, init_func=init, frames=frames, interval=1000/60)
+ani = animation.FuncAnimation(fig, animate, frames=frames, interval=1000/60)
 
 writervideo = animation.FFMpegWriter(fps=60)
 
 # Save the animation
 ani.save('GraphRaw.mp4', fps=60, extra_args=['-vcodec', 'libx264'])
 
-plt.close()
+#plt.show()
