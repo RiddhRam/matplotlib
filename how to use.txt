@@ -1,9 +1,15 @@
+NOTES:
+After running graph.py, the x-axis might still be labeled as 'X', 
+this is fixed after running VideoMaker.py since it draws the correct label over it
+
+For videos with 1 single line, set car colors 1 and 2 to #282c44 and make all data points the same
+
+Steps:
 Copy data from spreadsheets and change other values in interoplate.py.
 
 Then run graph.py, counter.py and legend.py.
 In graph.py the maximumY var may need to be changed sometimes. 
 
-Then run ResizeCrop.py
 Then run MainVideoMaker.py
 Then run LastFrameMaker.py
 Then run FinalVideo.py

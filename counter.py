@@ -60,6 +60,6 @@ text.set_path_effects([
     ])
 
 # Save the animation
-ani.save('CounterRaw.mp4', fps=60, extra_args=['-vcodec', 'libx264'])
+ani.save('CounterRaw.mp4', fps=60, extra_args=['-vcodec', 'libx265', '-b:v', '10M'])
 
 #plt.show()

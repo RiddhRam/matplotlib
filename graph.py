@@ -127,6 +127,6 @@ ani = animation.FuncAnimation(fig, animate, frames=frames, interval=1000/60)
 writervideo = animation.FFMpegWriter(fps=60)
 
 # Save the animation
-ani.save('GraphRaw.mp4', fps=60, extra_args=['-vcodec', 'libx264'])
+ani.save('GraphRaw.mp4', fps=60, extra_args=['-vcodec', 'libx265', '-b:v', '10M'])
 
 #plt.show()

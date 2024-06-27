@@ -65,7 +65,7 @@ def update(i):
         # Color box, it still needs text so it matches the length of the text
         ax.text(0.5, 0.6-0.2*index+0.004, val[0], color=val[2], ha='center', 
                 fontsize=17, alpha=0, transform=ax.transAxes, 
-                bbox=dict(facecolor=val[2], alpha=0.2, boxstyle='round,pad=0.1'))
+                bbox=dict(facecolor=val[2], edgecolor=val[2], alpha=0.2, boxstyle='round,pad=0.1'))
 
         # Main text
         ax.text(0.5, 0.6-0.2*index, val[0], color=val[2], ha='center', fontsize=17,
@@ -80,6 +80,6 @@ def update(i):
 ani = FuncAnimation(fig, update, frames=frames, interval=1000/60)
 
 # Save the animation
-ani.save("LegendRaw.mp4", fps=60, extra_args=['-vcodec', 'libx264'])
+ani.save("LegendRaw.mp4", fps=60, extra_args=['-vcodec', 'libx265', '-b:v', '10M'])
 
 #plt.show()

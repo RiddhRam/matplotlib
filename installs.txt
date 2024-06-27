@@ -1,7 +1,3 @@
-NOTES:
-After running graph.py, the x-axis might still be labeled as 'X', 
-this is fixed after running VideoMaker.py since it draws the correct label over it
-
 Mac:
 install ffmpeg with homebrew
 

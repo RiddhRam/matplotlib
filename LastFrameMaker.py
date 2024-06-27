@@ -29,6 +29,8 @@ car1Model = read_csv_file('car1Model.csv', True, 1)
 car2Model = read_csv_file('car2Model.csv', True, 1)
 car3Model = read_csv_file('car3Model.csv', True, 1)
 
+car1Color = read_csv_file('car1Color.csv', True, 1)
+
 car1FinalPrice = read_csv_file('car1FinalPrice.csv', False, 1)
 car2FinalPrice = read_csv_file('car2FinalPrice.csv', False, 1)
 car3FinalPrice = read_csv_file('car3FinalPrice.csv', False, 1)
@@ -51,6 +53,11 @@ followText = followText.set_duration(lastFrameClip.duration)
 pricesText = TextClip("Prices in " + str(endingYear) + "\n" + car1Model + ": $" + str(car1FinalPrice) + "\n" + car2Model + 
                       ": $" + str(car2FinalPrice) + "\n" + car3Model + ": $" + str(car3FinalPrice)
                       , font ="Arial-Bold", fontsize=40, color='white')
+
+if car1Color == '#282c44':
+    pricesText = TextClip("Price in " + str(endingYear) + "\n" + car3Model + ": $" + str(car3FinalPrice)
+                      , font ="Arial-Bold", fontsize=40, color='white')
+    
 pricesText = pricesText.set_duration(lastFrameClip.duration)
 
 # What prices do you predict?
@@ -74,4 +81,4 @@ pricesText = pricesText.set_position((pricesCenterXPosition, 150))
 questionText = questionText.set_position((questionCenterXPosition, 400))
 
 lastFrameWithText = CompositeVideoClip([lastFrameClip, followText, pricesText, questionText], size=(totalWidth, totalHeight))
-lastFrameWithText.write_videofile("LastFrame.mp4", codec="libx264", fps=60)
+lastFrameWithText.write_videofile("LastFrameFinal.mp4", codec="libx265", fps=60, bitrate="5000k", audio=False)
