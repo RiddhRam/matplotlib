@@ -26,11 +26,17 @@ totalHeight = int(totalWidth * (16/9))
 print(str(totalWidth) + 'x' + str(totalHeight))
 
 # #282c44 is same as (40, 44, 68)
+
+# When making the raw counter, graph and legend videos, the above colour was used
+# Due to compression, the colour is changed to the one below
+
+# #272B43 is same as (39, 43, 67)
+
 # Solid dark blue background
-solidColour = ColorClip(size=(totalWidth, totalHeight), color=(40, 44, 68), duration=resized_GraphClip.duration)
+solidColour = ColorClip(size=(totalWidth, totalHeight), color=(39, 43, 67), duration=resized_GraphClip.duration)
 
 # Title
-titleText = TextClip("2020 Tesla Model Y Price Predictions", font ="Arial-Bold", fontsize=40, color='white')
+titleText = TextClip("2017 Porsche Panamera Price Predictions", font ="Arial-Bold", fontsize=40, color='white')
 titleText = titleText.set_duration(resized_GraphClip.duration)
 
 # Calculate the horizontal center position for the title text
@@ -38,7 +44,7 @@ titleWidth = titleText.size[0]
 titleCenterXPosition = (totalWidth - titleWidth) // 2
 
 # This blocks out the 'X' x-axis label from the graph clip so the actual x-axis label below can be seen
-textBackgroundColor = ColorClip(size=(50, 20), color=(40, 44, 68), duration=resized_GraphClip.duration)
+textBackgroundColor = ColorClip(size=(50, 20), color=(39, 43, 67), duration=resized_GraphClip.duration)
 
 # X-Axis label
 # Have to rewrite this one since for some reasons matplotlib didn't want to use the right label when creating the graph
@@ -48,12 +54,12 @@ xAxisText = xAxisText.set_duration(resized_GraphClip.duration)
 # Create a larger composite frame
 compositeClip = CompositeVideoClip([
     solidColour.set_position((0, 0)),
-    resized_GraphClip.set_position((0, 600)), # Graph on the left at (0, 600)
-    titleText.set_position((titleCenterXPosition, 610)),
-    textBackgroundColor.set_position((440, 1250)),
-    xAxisText.set_position((460, 1260)),
-    resized_LegendClip.set_position((resized_GraphClip.size[0] - 92, 800)), # Legend to the right of the graph, below counter
-    resized_CounterClip.set_position((resized_GraphClip.size[0] - 45, 690))  # Counter to the right of the graph, above legend
+    resized_GraphClip.set_position((0, 150)), # Graph on the left at (0, 600)
+    titleText.set_position((titleCenterXPosition, 260)),
+    textBackgroundColor.set_position((460, 1625)),
+    xAxisText.set_position((460, 1675)),
+    resized_LegendClip.set_position((resized_GraphClip.size[0] - 92, 460)), # Legend to the right of the graph, below counter
+    resized_CounterClip.set_position((resized_GraphClip.size[0] - 45, 350))  # Counter to the right of the graph, above legend
 ], size=(totalWidth, totalHeight))  # Set composite size to match total width and graph's height
 
 # The last frame will be held for 1 second to display text

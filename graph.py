@@ -57,7 +57,7 @@ plt.style.use({"axes.facecolor": "#282c44"})
 fig, ax = plt.subplots()
 
 # Size of the graph in inches
-fig.set_size_inches(8, 6)
+fig.set_size_inches(8, 14)
 
 fig.patch.set_facecolor('#282c44')
 

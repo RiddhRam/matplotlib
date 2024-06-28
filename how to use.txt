@@ -5,13 +5,16 @@ this is fixed after running VideoMaker.py since it draws the correct label over 
 For videos with 1 single line, set car colors 1 and 2 to #282c44 and make all data points the same
 
 Steps:
-Copy data from spreadsheets and change other values in interoplate.py.
+Copy data from spreadsheets and change other values in interpolate.py.
 
 Then run graph.py, counter.py and legend.py.
 In graph.py the maximumY var may need to be changed sometimes. 
 
+IMPORTANT: RUN IN THIS EXACT ORDER
 Then run MainVideoMaker.py
 Then run LastFrameMaker.py
-Then run FinalVideo.py
 
-Then import video into capcut and then export just to make sure video is compatible with all platforms
+Then import MainVideo.mp4 and LastFrameFinal.mp4 into CapCut
+Trim first few frames from MainVideo.mp4 up until the second year shows and the axes look normal
+
+There may be a template already made in CapCut and all you have to do it export it

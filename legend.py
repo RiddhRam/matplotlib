@@ -64,11 +64,11 @@ def update(i):
     for index, val in enumerate(sorted_values):
         # Color box, it still needs text so it matches the length of the text
         ax.text(0.5, 0.6-0.2*index+0.004, val[0], color=val[2], ha='center', 
-                fontsize=17, alpha=0, transform=ax.transAxes, 
+                fontsize=15, alpha=0, transform=ax.transAxes, 
                 bbox=dict(facecolor=val[2], edgecolor=val[2], alpha=0.2, boxstyle='round,pad=0.1'))
 
         # Main text
-        ax.text(0.5, 0.6-0.2*index, val[0], color=val[2], ha='center', fontsize=17,
+        ax.text(0.5, 0.6-0.2*index, val[0], color=val[2], ha='center', fontsize=15,
                             transform=ax.transAxes)
 
 
