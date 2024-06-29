@@ -26,7 +26,7 @@ def read_csv_file(file_path, string, items):
 
         return results
 
-maximumY = 57000
+maximumY = 62000
 
 startingYear = read_csv_file('startingYear.csv', False, 1)
 endingYear = read_csv_file('endingYear.csv', False, 1)
@@ -94,6 +94,11 @@ def animate(i):
 
     # Redraw the plot with updated data
     df.plot(x='x', y=[car1, car2, car3], linewidth=3, ax=ax, legend=False, color=colors)
+
+
+    # Set fixed x and y axis limits
+    ax.set_xlim(startingYear, endingYear)
+    ax.set_ylim(0, maximumY)
 
     # Set the labels
     ax.set_xlabel('Year', color='white')
