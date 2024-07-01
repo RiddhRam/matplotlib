@@ -1,6 +1,6 @@
 NOTES:
-After running graph.py, the x-axis might still be labeled as 'X', 
-this is fixed after running VideoMaker.py since it draws the correct label over it
+After running graph.py, the x-axis won't have any label,
+this is fixed after running VideoMaker.py since it draws the correct label
 
 For videos with 1 single line, set car colors 1 and 2 to #282c44 and make all data points the same
 

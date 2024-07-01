@@ -65,7 +65,7 @@ def update(i):
         # Color box, it still needs text so it matches the length of the text
         ax.text(0.5, 0.6-0.2*index+0.004, val[0], color=val[2], ha='center', 
                 fontsize=15, alpha=0, transform=ax.transAxes, 
-                bbox=dict(facecolor=val[2], edgecolor=val[2], alpha=0.2, boxstyle='round,pad=0.1'))
+                bbox=dict(facecolor=val[2], edgecolor=val[2], alpha=0.1, boxstyle='round,pad=0.1'))
 
         # Main text
         ax.text(0.5, 0.6-0.2*index, val[0], color=val[2], ha='center', fontsize=15,

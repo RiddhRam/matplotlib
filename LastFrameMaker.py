@@ -41,8 +41,8 @@ graphClip = VideoFileClip("Graph.mp4")
 counterClip = VideoFileClip("Counter.mp4")
 
 # Calculate total width needed
-totalWidth = graphClip.size[0] + counterClip.size[0]
-totalHeight = int(totalWidth * (16/9))
+totalWidth = 1080
+totalHeight = 1920
 
 # Ending text
 # Follow Text
@@ -64,7 +64,7 @@ questionText = questionText.set_duration(lastFrameClip.duration)
 
 # Background for followText and questionText
 # This blocks out the 'X' x-axis label from the graph clip so the actual x-axis label below can be seen
-textBackgroundColor = ColorClip(size=(550, 200), color=(0, 0, 0), duration=lastFrameClip.duration)
+textBackgroundColor = ColorClip(size=(550, 300), color=(0, 0, 0), duration=lastFrameClip.duration)
 
 # Calculate the horizontal center position for the texts
 followWidth = followText.size[0]
@@ -81,9 +81,9 @@ textBackgroundCenterXPosition = (totalWidth - textBackgroundWidth) // 2
 
 # Set the positions
 lastFrameClip = lastFrameClip.set_position((0, 0))
-followText = followText.set_position((followCenterXPosition, 625))
-pricesText = pricesText.set_position((pricesCenterXPosition, 60))
-questionText = questionText.set_position((questionCenterXPosition, 525))
+followText = followText.set_position((followCenterXPosition, 725))
+pricesText = pricesText.set_position((pricesCenterXPosition, 525))
+questionText = questionText.set_position((questionCenterXPosition, 625))
 textBackgroundColor = textBackgroundColor.set_position((textBackgroundCenterXPosition, 500))
 
 lastFrameWithText = CompositeVideoClip([lastFrameClip, textBackgroundColor, followText, pricesText, questionText], size=(totalWidth, totalHeight))

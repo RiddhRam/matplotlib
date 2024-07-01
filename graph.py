@@ -26,11 +26,13 @@ def read_csv_file(file_path, string, items):
 
         return results
 
-maximumY = 62000
+maximumY = 46000
 
 startingYear = read_csv_file('startingYear.csv', False, 1)
 endingYear = read_csv_file('endingYear.csv', False, 1)
 frames = read_csv_file('frames.csv', False, 1)
+# For quick testing
+#frames = 30
 
 car1 = read_csv_file('car1.csv', True, 1)
 car2 = read_csv_file('car2.csv', True, 1)
@@ -57,7 +59,7 @@ plt.style.use({"axes.facecolor": "#282c44"})
 fig, ax = plt.subplots()
 
 # Size of the graph in inches
-fig.set_size_inches(8, 14)
+fig.set_size_inches(9, 14)
 
 fig.patch.set_facecolor('#282c44')
 
@@ -92,17 +94,17 @@ def animate(i):
     # Clear the previous plot to reduce lag
     ax.clear()  
 
-    # Redraw the plot with updated data
-    df.plot(x='x', y=[car1, car2, car3], linewidth=3, ax=ax, legend=False, color=colors)
-
-
     # Set fixed x and y axis limits
     ax.set_xlim(startingYear, endingYear)
     ax.set_ylim(0, maximumY)
 
+    # Redraw the plot with updated data
+    df.plot(x='x', y=[car1, car2, car3], linewidth=9, ax=ax, legend=False, color=colors)
+
     # Set the labels
-    ax.set_xlabel('Year', color='white')
-    ax.set_ylabel('Price', color='white')
+    # Hide this one since it doesn't work properly, it will be added in MainVideoMaker.py
+    ax.set_xlabel('Year', color='white', fontsize=0)
+    ax.set_ylabel('Price', color='white', fontsize=15)
 
     # Format the prices to have a $ at the start
     ax.yaxis.set_major_formatter(formatter)
@@ -110,15 +112,18 @@ def animate(i):
     # Ensure x-axis shows only integers
     ax.xaxis.set_major_locator(MaxNLocator(6, integer=True))
 
+    # Set the font size for the tick labels
+    ax.tick_params(axis='both', which='major', labelsize=12.5)
+
     # Add the glow to the lines
     n_lines = 10
-    diff_linewidth = 1.25
-    alpha_value = 0.03
+    diff_linewidth = 1.3
+    alpha_value = 0.05
     for n in range(1, n_lines):
         df.plot(
                 x='x', 
                 y=[car1, car2, car3],
-                linewidth=3+(diff_linewidth*n),
+                linewidth=9+(diff_linewidth*n),
                 alpha=alpha_value,
                 legend=False,
                 ax=ax,
