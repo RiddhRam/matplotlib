@@ -2,22 +2,16 @@ from moviepy.editor import VideoFileClip, CompositeVideoClip, ColorClip, TextCli
 
 # Load videos
 GraphClip = VideoFileClip("GraphRaw.mp4")
-LegendClip = VideoFileClip("LegendRaw.mp4")
 CounterClip = VideoFileClip("CounterRaw.mp4")
 
 # Cropping
-legendX1, legendY1 = 350, 320  # top-left corner - legend
-legendX2, legendY2 = 950, 750  # bottom-right corner - legend
-cropped_LegendClip = LegendClip.crop(x1=legendX1, y1=legendY1, x2=legendX2, y2=legendY2)
-
 counterX1, counterY1 = 450, 400  # top-left corner - counter
 counterX2, counterY2 = 850, 550  # bottom-right corner - counter
 cropped_CounterClip = CounterClip.crop(x1=counterX1, y1=counterY1, x2=counterX2, y2=counterY2)
 
 # Resizing
-resized_GraphClip = GraphClip.resize(width=900)
-resized_LegendClip = cropped_LegendClip.resize(width=250)
-resized_CounterClip = cropped_CounterClip.resize(width=151)
+resized_GraphClip = GraphClip.resize(width=1060)
+resized_CounterClip = cropped_CounterClip.resize(width=181)
 
 # Calculate total width needed
 totalWidth = 1080
@@ -33,10 +27,10 @@ print(str(totalWidth) + 'x' + str(totalHeight))
 # #272B43 is same as (39, 43, 67)
 
 # Solid dark blue background
-solidColour = ColorClip(size=(totalWidth, totalHeight), color=(39, 43, 67), duration=resized_GraphClip.duration)
+solidColour = ColorClip(size=(totalWidth, totalHeight), color=(255, 255, 255), duration=resized_GraphClip.duration)
 
 # Title
-titleText = TextClip("2015 Mercedes-Benz C300 Price Predictions", font ="Arial-Bold", fontsize=40, color='white')
+titleText = TextClip("2020 Tesla Model 3 Price Predictions", font ="Arial-Bold", fontsize=40, color='#4ca0d7')
 titleText = titleText.set_duration(resized_GraphClip.duration)
 
 # Calculate the horizontal center position for the title text
@@ -44,18 +38,28 @@ titleWidth = titleText.size[0]
 titleCenterXPosition = (totalWidth - titleWidth) // 2
 
 # X-Axis label
-# Have to rewrite this one since for some reasons matplotlib didn't want to use the right label when creating the graph
-xAxisText = TextClip("Year", font ="Arial-Bold", fontsize=25, color='white')
+xAxisText = TextClip("Year", font ="Arial-Bold", fontsize=25, color='#4ca0d7')
 xAxisText = xAxisText.set_duration(resized_GraphClip.duration)
+
+# Calculate the horizontal center position for the x-axis text
+xAxisWidth = xAxisText.size[0]
+xAxisCenterXPosition = (totalWidth - xAxisWidth) // 2
+
+# Y-Axis label
+# Can't rotate 90 for some reason so rotate 89.9
+yAxisText = TextClip("Price", font="Arial-Bold", fontsize=80, color='#4ca0d7')
+yAxisText = yAxisText.rotate(89.9)
+yAxisText = yAxisText.resize(height=65)  # Adjust the height as needed
+yAxisText = yAxisText.set_duration(resized_GraphClip.duration)
 
 # Create a larger composite frame
 compositeClip = CompositeVideoClip([
     solidColour.set_position((0, 0)),
-    resized_GraphClip.set_position((0, 150)), # Graph on the left at (0, 600)
+    resized_GraphClip.set_position((20, 180)), # Graph on the left
     titleText.set_position((titleCenterXPosition, 260)),
-    xAxisText.set_position((460, 1475)),
-    resized_LegendClip.set_position((resized_GraphClip.size[0] - 80, 460)), # Legend to the right of the graph, below counter
-    resized_CounterClip.set_position((resized_GraphClip.size[0] - 30, 350))  # Counter to the right of the graph, above legend
+    xAxisText.set_position((xAxisCenterXPosition, 1725)),
+    yAxisText.set_position((10, 900)),
+    resized_CounterClip.set_position((835, 380))  # Counter to the right of the graph
 ], size=(totalWidth, totalHeight))  # Set composite size to match total width and graph's height
 
 # The last frame will be held for 1 second to display text

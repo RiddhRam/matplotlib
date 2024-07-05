@@ -41,11 +41,11 @@ def update_text(i):
 fig, ax = plt.subplots()
 
 # Set up the plot with a white background and black text
-fig.patch.set_facecolor('#282c44')
+#fig.patch.set_facecolor('#282c44')
 ax.axis('off')
 
 # Initialize the text element
-text = ax.text(0.5, 0.5, startingYear, fontsize=50, ha='center', va='center', color='white')
+text = ax.text(0.5, 0.5, startingYear, fontsize=50, ha='center', va='center', color='black')
 
 # Create animation
 ani = animation.FuncAnimation(fig, update_text, frames=frames, interval=1000/60, blit=True)

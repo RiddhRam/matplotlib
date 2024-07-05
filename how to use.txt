@@ -1,8 +1,9 @@
 NOTES:
-After running graph.py, the x-axis won't have any label,
-this is fixed after running VideoMaker.py since it draws the correct label
+After running graph.py, the x-axis and y-axis won't have any label,
+this is fixed after running MainVideoMaker.py since it draws the correct labels
 
 For videos with 1 single line, set car colors 1 and 2 to #282c44 and make all data points the same
+If only 1 car, dont use the legend.py, use the text that follows the lines
 
 Steps:
 Copy data from spreadsheets and change other values in interpolate.py.

@@ -45,7 +45,7 @@ y3_interp = read_csv_file('y3_interp.csv', False, 2)
 # Initialize a figure and axis
 fig, ax = plt.subplots()
 
-fig.patch.set_facecolor('#282c44')
+#fig.patch.set_facecolor('#282c44')
 
 # Function to update the plot
 def update(i):
