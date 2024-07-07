@@ -6,8 +6,9 @@ For videos with 1 single line, set car colors 1 and 2 to #282c44 and make all da
 If only 1 car, dont use the legend.py, use the text that follows the lines
 
 Steps:
-Copy data from spreadsheets and change other values in interpolate.py.
+Drop table_data.csv into project folder.
 
+Run interpolate.py
 Then run graph.py, counter.py and legend.py.
 In graph.py the maximumY var may need to be changed sometimes. 
 

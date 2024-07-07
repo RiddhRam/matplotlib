@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib.ticker import FuncFormatter, MaxNLocator
-import matplotlib.patheffects as patheffects
 import pandas as pd
 import csv
 
@@ -27,7 +26,7 @@ def read_csv_file(file_path, string, items):
 
         return results
 
-maximumY = 54000
+maximumY = 48000
 
 startingYear = read_csv_file('startingYear.csv', False, 1)
 endingYear = read_csv_file('endingYear.csv', False, 1)
@@ -141,7 +140,7 @@ def animate(i):
     return lines, text3
 
 # Margins from the right window edge
-plt.subplots_adjust(right=0.7)
+plt.subplots_adjust(right=0.65)
 # Create animation
 ani = animation.FuncAnimation(fig, animate, frames=frames, interval=1000/60)
 

@@ -1,4 +1,29 @@
 from moviepy.editor import VideoFileClip, CompositeVideoClip, ColorClip, TextClip
+import csv
+
+def read_csv_file(file_path, string, items):
+    if items == 1:
+        with open(file_path, 'r', newline='') as f:
+            reader = csv.reader(f)
+
+            for row in reader:
+                if not string:
+                    return int(row[0])
+                else:
+                    return row[0]
+
+    else:
+        results = []
+        with open(file_path, 'r', newline='') as f:
+            reader = csv.reader(f)
+
+            for row in reader:
+                for item in row:
+                    results.append(float(item))
+
+        return results
+
+carName = read_csv_file('car3.csv', True, 1)
 
 # Load videos
 GraphClip = VideoFileClip("GraphRaw.mp4")
@@ -19,18 +44,11 @@ totalHeight = 1920
 
 print(str(totalWidth) + 'x' + str(totalHeight))
 
-# #282c44 is same as (40, 44, 68)
-
-# When making the raw counter, graph and legend videos, the above colour was used
-# Due to compression, the colour is changed to the one below
-
-# #272B43 is same as (39, 43, 67)
-
 # Solid dark blue background
 solidColour = ColorClip(size=(totalWidth, totalHeight), color=(255, 255, 255), duration=resized_GraphClip.duration)
 
 # Title
-titleText = TextClip("2020 Tesla Model 3 Price Predictions", font ="Arial-Bold", fontsize=40, color='#4ca0d7')
+titleText = TextClip( carName + ' Price Predictions', font ="Arial-Bold", fontsize=40, color='#4ca0d7')
 titleText = titleText.set_duration(resized_GraphClip.duration)
 
 # Calculate the horizontal center position for the title text
@@ -59,7 +77,7 @@ compositeClip = CompositeVideoClip([
     titleText.set_position((titleCenterXPosition, 260)),
     xAxisText.set_position((xAxisCenterXPosition, 1725)),
     yAxisText.set_position((10, 900)),
-    resized_CounterClip.set_position((835, 380))  # Counter to the right of the graph
+    resized_CounterClip.set_position((805, 380))  # Counter to the right of the graph
 ], size=(totalWidth, totalHeight))  # Set composite size to match total width and graph's height
 
 # The last frame will be held for 1 second to display text

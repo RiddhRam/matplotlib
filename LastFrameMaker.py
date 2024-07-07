@@ -45,46 +45,30 @@ totalWidth = 1080
 totalHeight = 1920
 
 # Ending text
-# Follow Text
-followText = TextClip("FOLLOW FOR MORE", font ="Arial-Bold", fontsize=35, color='white')
-followText = followText.set_duration(lastFrameClip.duration)
-
 # Ending prices text
 pricesText = TextClip(car1Model + ": $" + str(car1FinalPrice) + "\n" + car2Model + ": $" + str(car2FinalPrice) + "\n" + car3Model + ": $" + str(car3FinalPrice)
-                      , font ="Arial-Bold", fontsize=40, color='white')
+                      , font ="Arial-Bold", fontsize=40, color='black')
 
 if car1Color == '#282c44':
-    pricesText = TextClip(car3Model + ": $" + str(car3FinalPrice), font ="Arial-Bold", fontsize=40, color='white')
+    pricesText = TextClip("Price in " + str(endingYear) + ": $" + str(car3FinalPrice), font ="Arial-Bold", fontsize=40, color='black')
     
 pricesText = pricesText.set_duration(lastFrameClip.duration)
 
-# What prices do you predict?
-questionText = TextClip("What prices do you predict?", font ="Arial-Bold", fontsize=35, color='white')
-questionText = questionText.set_duration(lastFrameClip.duration)
-
-# Background for followText and questionText
-# This blocks out the 'X' x-axis label from the graph clip so the actual x-axis label below can be seen
-textBackgroundColor = ColorClip(size=(550, 300), color=(0, 0, 0), duration=lastFrameClip.duration)
+# Ending Follow Text
+followText = TextClip("FOLLOW FOR MORE", font ="Arial-Bold", fontsize=35, color='black')
+followText = followText.set_duration(lastFrameClip.duration)
 
 # Calculate the horizontal center position for the texts
-followWidth = followText.size[0]
-followCenterXPosition = (totalWidth - followWidth) // 2
-
 pricesWidth = pricesText.size[0]
 pricesCenterXPosition = (totalWidth - pricesWidth) // 2
 
-questionWidth = questionText.size[0]
-questionCenterXPosition = (totalWidth - questionWidth) // 2
-
-textBackgroundWidth = textBackgroundColor.size[0]
-textBackgroundCenterXPosition = (totalWidth - textBackgroundWidth) // 2
+followWidth = followText.size[0]
+followCenterXPosition = (totalWidth - followWidth) // 2
 
 # Set the positions
 lastFrameClip = lastFrameClip.set_position((0, 0))
-followText = followText.set_position((followCenterXPosition, 725))
-pricesText = pricesText.set_position((pricesCenterXPosition, 525))
-questionText = questionText.set_position((questionCenterXPosition, 625))
-textBackgroundColor = textBackgroundColor.set_position((textBackgroundCenterXPosition, 500))
+pricesText = pricesText.set_position((pricesCenterXPosition - 100, 1125))
+followText = followText.set_position((followCenterXPosition - 100, 1225))
 
-lastFrameWithText = CompositeVideoClip([lastFrameClip, textBackgroundColor, followText, pricesText, questionText], size=(totalWidth, totalHeight))
+lastFrameWithText = CompositeVideoClip([lastFrameClip, followText, pricesText], size=(totalWidth, totalHeight))
 lastFrameWithText.write_videofile("LastFrameFinal.mp4", codec="libx265", fps=60, bitrate="6000k", audio=False)

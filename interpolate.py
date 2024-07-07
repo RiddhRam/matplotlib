@@ -17,18 +17,38 @@ def interpolate_data(x, y, num_points):
     y_new = f(x_new)
     return x_new, y_new
 
-startingYear = 2020
-endingYear = 2040
-frames = 420
+startingYear = 2024
+endingYear = 2044
+frames = 360
 
 # Not used here but still used in multiple files
 car1 = ''
 car2 = ''
-car3 = '2020 Tesla Model 3'
+car3 = ''
 
 car1Model = 'Civic'
 car2Model = 'Camry'
-car3Model = 'Model 3'
+car3Model = 'Hilux9468903806'
+
+car3Values = []
+
+with open('table_data.csv', 'r', newline='') as f:
+    reader = csv.reader(f)
+
+    last_row = None
+    for index, row in enumerate(reader):
+        if index == 0:
+            car3 = row[1]
+        else:
+            car3Values.append(float(row[1]))
+            if index == 1:
+                startingYear = int(row[0])
+            
+        last_row = row
+    
+    # After the loop, print "hi"
+    if last_row is not None:
+        endingYear = int(last_row[0])
 
 savedColors = [
     '#4ca0d7',  # SpecGauge
@@ -43,13 +63,13 @@ backgroundColor = '#282c44'
 
 carColor1 = '#282c44'
 carColor2 = '#282c44'
-carColor3 = '#9900ff'
+carColor3 = '#ff0000'
 
 # Data from the spreadsheet
 x = np.linspace(startingYear, endingYear, 21)
-y1 = np.array([51657.9246, 46471.3114, 44553.1639, 41718.7956, 41832.5724, 39377.9064, 34374.8667, 34670.792, 32270.5705, 35546.539, 29466.1243, 30337.1686, 25804.1459, 25748.1194, 24571.9235, 25281.586, 19809.3059, 19725.3952, 17394.4646, 16632.8408, 19325.7546])
-y2 = np.array([51657.9246, 46471.3114, 44553.1639, 41718.7956, 41832.5724, 39377.9064, 34374.8667, 34670.792, 32270.5705, 35546.539, 29466.1243, 30337.1686, 25804.1459, 25748.1194, 24571.9235, 25281.586, 19809.3059, 19725.3952, 17394.4646, 16632.8408, 19325.7546])
-y3 = np.array([51657.9246, 46471.3114, 44553.1639, 41718.7956, 41832.5724, 39377.9064, 34374.8667, 34670.792, 32270.5705, 35546.539, 29466.1243, 30337.1686, 25804.1459, 25748.1194, 24571.9235, 25281.586, 19809.3059, 19725.3952, 17394.4646, 16632.8408, 19325.7546])
+y1 = np.array(car3Values)
+y2 = np.array(car3Values)
+y3 = np.array(car3Values)
 
 # Interpolate the data
 x_interp, y1_interp = interpolate_data(x, y1, frames)
