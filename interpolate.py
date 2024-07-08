@@ -46,7 +46,6 @@ with open('table_data.csv', 'r', newline='') as f:
             
         last_row = row
     
-    # After the loop, print "hi"
     if last_row is not None:
         endingYear = int(last_row[0])
 
@@ -63,7 +62,7 @@ backgroundColor = '#282c44'
 
 carColor1 = '#282c44'
 carColor2 = '#282c44'
-carColor3 = '#ff0000'
+carColor3 = '#4ca0d7'
 
 # Data from the spreadsheet
 x = np.linspace(startingYear, endingYear, 21)
