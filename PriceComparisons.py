@@ -1,0 +1,74 @@
+from moviepy.editor import VideoFileClip, CompositeVideoClip, ColorClip, TextClip
+import csv
+
+def read_csv_file(file_path, string, items):
+    if items == 1:
+        with open(file_path, 'r', newline='') as f:
+            reader = csv.reader(f)
+
+            for row in reader:
+                if not string:
+                    return int(row[0])
+                else:
+                    return row[0]
+
+    else:
+        results = []
+        with open(file_path, 'r', newline='') as f:
+            reader = csv.reader(f)
+
+            for row in reader:
+                for item in row:
+                    results.append(float(item))
+
+        return results
+
+carName = read_csv_file('car3.csv', True, 1)
+
+# Load videos
+GraphClip = VideoFileClip("GraphRaw.mp4")
+CounterClip = VideoFileClip("CounterRaw.mp4")
+
+# Cropping
+counterX1, counterY1 = 450, 400  # top-left corner - counter
+counterX2, counterY2 = 850, 550  # bottom-right corner - counter
+cropped_CounterClip = CounterClip.crop(x1=counterX1, y1=counterY1, x2=counterX2, y2=counterY2)
+
+# Resizing
+resized_GraphClip = GraphClip.resize(width=1060)
+resized_CounterClip = cropped_CounterClip.resize(width=181)
+
+# Calculate total width needed
+totalWidth = 1080
+totalHeight = 1920
+
+print(str(totalWidth) + 'x' + str(totalHeight))
+
+# Solid dark blue background
+solidColour = ColorClip(size=(totalWidth, totalHeight), color=(255, 255, 255), duration=resized_GraphClip.duration)
+
+# Title
+titleText = TextClip( carName + ' Price Predictions', font ="Arial-Bold", fontsize=50, color='#4ca0d7')
+titleText = titleText.set_duration(resized_GraphClip.duration)
+
+# Calculate the horizontal center position for the title text
+titleWidth = titleText.size[0]
+titleCenterXPosition = (totalWidth - titleWidth) // 2
+
+# Create a larger composite frame
+compositeClip = CompositeVideoClip([
+    solidColour.set_position((0, 0)),
+    resized_GraphClip.set_position((20, 180)), # Graph on the left
+    titleText.set_position((titleCenterXPosition, 260)),
+    resized_CounterClip.set_position((805, 380))  # Counter to the right of the graph
+], size=(totalWidth, totalHeight))  # Set composite size to match total width and graph's height
+
+# The last frame will be held for 1 second to display text
+lastFrame = compositeClip.duration - 1/60
+lastFrameClip = compositeClip.to_ImageClip(t=lastFrame, duration=1)
+
+# Have to write it then bring it back as a video or it won't work
+lastFrameClip.write_videofile("LastFrame.mp4", codec="libx265", fps=60, bitrate="5000k", audio=False)
+
+# Save the main video
+compositeClip.write_videofile("MainVideo.mp4", codec="libx265", fps=60, bitrate="5000k", audio=False)

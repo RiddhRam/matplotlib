@@ -48,36 +48,19 @@ print(str(totalWidth) + 'x' + str(totalHeight))
 solidColour = ColorClip(size=(totalWidth, totalHeight), color=(255, 255, 255), duration=resized_GraphClip.duration)
 
 # Title
-titleText = TextClip( carName + ' Price Predictions', font ="Arial-Bold", fontsize=40, color='#4ca0d7')
+titleText = TextClip(carName + ' Price Predictions', font ="Arial-Bold", fontsize=50, color='#4ca0d7')
 titleText = titleText.set_duration(resized_GraphClip.duration)
 
 # Calculate the horizontal center position for the title text
 titleWidth = titleText.size[0]
 titleCenterXPosition = (totalWidth - titleWidth) // 2
 
-# X-Axis label
-xAxisText = TextClip("Year", font ="Arial-Bold", fontsize=25, color='#4ca0d7')
-xAxisText = xAxisText.set_duration(resized_GraphClip.duration)
-
-# Calculate the horizontal center position for the x-axis text
-xAxisWidth = xAxisText.size[0]
-xAxisCenterXPosition = (totalWidth - xAxisWidth) // 2
-
-# Y-Axis label
-# Can't rotate 90 for some reason so rotate 89.9
-yAxisText = TextClip("Price", font="Arial-Bold", fontsize=80, color='#4ca0d7')
-yAxisText = yAxisText.rotate(89.9)
-yAxisText = yAxisText.resize(height=65)  # Adjust the height as needed
-yAxisText = yAxisText.set_duration(resized_GraphClip.duration)
-
 # Create a larger composite frame
 compositeClip = CompositeVideoClip([
     solidColour.set_position((0, 0)),
     resized_GraphClip.set_position((20, 180)), # Graph on the left
-    titleText.set_position((titleCenterXPosition, 260)),
-    xAxisText.set_position((xAxisCenterXPosition, 1725)),
-    yAxisText.set_position((10, 900)),
-    resized_CounterClip.set_position((805, 380))  # Counter to the right of the graph
+    titleText.set_position((titleCenterXPosition, 400)),
+    resized_CounterClip.set_position((805, 520)),  # Counter to the right of the graph
 ], size=(totalWidth, totalHeight))  # Set composite size to match total width and graph's height
 
 # The last frame will be held for 1 second to display text

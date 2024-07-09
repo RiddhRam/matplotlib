@@ -26,7 +26,7 @@ def read_csv_file(file_path, string, items):
 
         return results
 
-maximumY = 48000
+maximumY = 85000
 
 startingYear = read_csv_file('startingYear.csv', False, 1)
 endingYear = read_csv_file('endingYear.csv', False, 1)
@@ -35,6 +35,8 @@ frames = read_csv_file('frames.csv', False, 1)
 car1 = read_csv_file('car1.csv', True, 1)
 car2 = read_csv_file('car2.csv', True, 1)
 car3 = read_csv_file('car3.csv', True, 1)
+
+carImageName = read_csv_file('car3ImageName.csv', True, 1)
 
 car1Color = read_csv_file('car1Color.csv', True, 1)
 car2Color = read_csv_file('car2Color.csv', True, 1)
@@ -59,8 +61,6 @@ fig, ax = plt.subplots()
 # Size of the graph in inches
 fig.set_size_inches(9, 14)
 
-#fig.patch.set_facecolor('#282c44')
-
 # Adjust tick labels color
 ax.tick_params(axis='x', colors='black')
 ax.tick_params(axis='y', colors='black')
@@ -83,6 +83,8 @@ df = pd.DataFrame({car1: y1_interp, car2: y2_interp, car3: y3_interp, 'x':x_inte
 
 # Format the y-axis labels to show the dollar sign
 formatter = FuncFormatter(lambda x, _: f'${x:,.0f}')
+
+image = plt.imread('Logos/' + carImageName + '.png')
 
 # Animation function
 def animate(i):
@@ -110,7 +112,7 @@ def animate(i):
     ax.xaxis.set_major_locator(MaxNLocator(6, integer=True))
 
     # Set the font size for the tick labels
-    ax.tick_params(axis='both', which='major', labelsize=13.5)
+    ax.tick_params(axis='both', which='major', labelsize=15)
 
     # Add the glow to the lines
     ''' n_lines = 10
@@ -127,22 +129,20 @@ def animate(i):
                 color=colors)'''
 
     # Text annotations for each line
-    #text1 = ax.text(startingYear, 0, car1, fontsize=18, color='#000', fontweight='bold')
-    #text2 = ax.text(startingYear, 0, car2, fontsize=18, color='#000', fontweight='bold')
-    text3 = ax.text(startingYear, 0, car3, fontsize=18, color='#000', fontweight='bold')
+    text = ax.text(startingYear, 0, car3, fontsize=16, color='#000', fontweight='bold')
 
     if i > 0:
-        #text1.set_position((x_interp[i-1], y1_interp[i-1] + 1000))
-        #text2.set_position((x_interp[i-1], y2_interp[i-1] + 1000))
-        text3.set_position((x_interp[i-1], y3_interp[i-1] + 1000))
+        text.set_position((x_interp[i-1], y3_interp[i-1] + 1000))
 
-    #return lines, text1, text2, text3
-    return lines, text3
+    return lines, text
 
-# Margins from the right window edge
-plt.subplots_adjust(right=0.65)
+# Margins from the right and top window edge
+plt.subplots_adjust(right=0.65, top=0.8)
 # Create animation
 ani = animation.FuncAnimation(fig, animate, frames=frames, interval=1000/60)
+
+# Add the image to the top
+fig.figimage(image, xo=540, yo=fig.bbox.ymax - image.shape[0], zorder=1)
 
 # Save the animation
 ani.save('GraphRaw.mp4', fps=60, extra_args=['-vcodec', 'libx265', '-b:v', '10M'])

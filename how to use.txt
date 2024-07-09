@@ -7,13 +7,19 @@ If only 1 car, dont use the legend.py, use the text that follows the lines
 
 Steps:
 Drop table_data.csv into project folder.
+Make sure to change the name of the vehicles in the csv.
+In interpolate.py, change the logo values to the names of the according vehicle logo file names in the Logos folder
 
 Run interpolate.py
-Then run graph.py, counter.py and legend.py.
-In graph.py the maximumY var may need to be changed sometimes. 
+Either run SingleGraph.py or ComparisonGraph.py depending on how many vehicles
+Then run counter.py
+If running ComparisonGraph.py then run legend.py as well
+
+In graph.py the maximumY var may need to be changed sometimes to fit all lines into the graph
 
 IMPORTANT: RUN IN THIS EXACT ORDER
-Then run MainVideoMaker.py
+
+Either run SinglePricePredictor.py or PriceComparisons.py depending on how many vehicles
 Then run LastFrameMaker.py
 
 Then import MainVideo.mp4 and LastFrameFinal.mp4 into CapCut

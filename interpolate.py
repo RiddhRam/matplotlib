@@ -17,14 +17,18 @@ def interpolate_data(x, y, num_points):
     y_new = f(x_new)
     return x_new, y_new
 
-startingYear = 2024
-endingYear = 2044
+startingYear = 2024 # Place Holder
+endingYear = 2044 # Place Holder
 frames = 360
 
+car1ImageName = ''
+car2ImageName = ''
+car3ImageName = 'Chevrolet Corvette'
+
 # Not used here but still used in multiple files
-car1 = ''
-car2 = ''
-car3 = ''
+car1 = '' # Place Holder
+car2 = '' # Place Holder
+car3 = '' # Place Holder
 
 car1Model = 'Civic'
 car2Model = 'Camry'
@@ -83,6 +87,15 @@ write_csv_file('endingYear.csv', endingYear, 1)
 
 # Write frames
 write_csv_file('frames.csv', frames, 1)
+
+# Write car1ImageName
+write_csv_file('car1ImageName.csv', car1ImageName, 1)
+
+# Write car2ImageName
+write_csv_file('car2ImageName.csv', car2ImageName, 1)
+
+# Write car3ImageName
+write_csv_file('car3ImageName.csv', car3ImageName, 1)
 
 # Write car1
 write_csv_file('car1.csv', car1, 1)
