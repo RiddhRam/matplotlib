@@ -37,8 +37,6 @@ car3FinalPrice = read_csv_file('car3FinalPrice.csv', False, 1)
 
 # Load Videos
 lastFrameClip = VideoFileClip("LastFrame.mp4")
-graphClip = VideoFileClip("Graph.mp4")
-counterClip = VideoFileClip("Counter.mp4")
 
 # Calculate total width needed
 totalWidth = 1080
