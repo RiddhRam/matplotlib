@@ -26,7 +26,7 @@ def read_csv_file(file_path, string, items):
 
         return results
 
-maximumY = 63000
+maximumY = 53000
 
 startingYear = read_csv_file('startingYear.csv', False, 1)
 endingYear = read_csv_file('endingYear.csv', False, 1)
@@ -142,7 +142,7 @@ plt.subplots_adjust(right=0.65, top=0.8)
 ani = animation.FuncAnimation(fig, animate, frames=frames, interval=1000/60)
 
 # Add the image to the top
-fig.figimage(image, xo=fig.bbox.xmax/2 - image.shape[1]/2, yo=fig.bbox.ymax - image.shape[0] + 25, zorder=1)
+fig.figimage(image, xo=fig.bbox.xmax/2 - image.shape[1]/2, yo=fig.bbox.ymax - image.shape[0], zorder=1)
 
 # Save the animation
 ani.save('GraphRaw.mp4', fps=60, extra_args=['-vcodec', 'libx265', '-b:v', '10M'])
