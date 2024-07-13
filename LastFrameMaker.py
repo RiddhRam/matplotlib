@@ -48,7 +48,7 @@ pricesText = TextClip(car1Model + ": $" + str(car1FinalPrice) + "\n" + car2Model
                       , font ="Arial-Bold", fontsize=40, color='black')
 
 if car1Color == '#282c44':
-    pricesText = TextClip("Price in " + str(endingYear) + ": $" + str(car3FinalPrice), font ="Arial-Bold", fontsize=40, color='black')
+    pricesText = TextClip("Average Price in " + str(endingYear) + ": $" + str(car3FinalPrice), font ="Arial-Bold", fontsize=35, color='black')
     
 pricesText = pricesText.set_duration(lastFrameClip.duration)
 

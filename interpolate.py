@@ -23,7 +23,7 @@ frames = 360
 
 car1ImageName = ''
 car2ImageName = ''
-car3ImageName = 'Kia'
+car3ImageName = 'Honda'
 
 # Not used here but still used in multiple files
 car1 = '' # Place Holder
@@ -36,6 +36,9 @@ car3Model = 'Hilux9468903806'
 
 car3Values = []
 
+# Count the number of years to show
+count = 0
+
 with open('table_data.csv', 'r', newline='') as f:
     reader = csv.reader(f)
 
@@ -47,6 +50,8 @@ with open('table_data.csv', 'r', newline='') as f:
             car3Values.append(float(row[1]))
             if index == 1:
                 startingYear = int(row[0])
+
+            count += 1
             
         last_row = row
     
@@ -69,7 +74,7 @@ carColor2 = '#282c44'
 carColor3 = '#4ca0d7'
 
 # Data from the spreadsheet
-x = np.linspace(startingYear, endingYear, 21)
+x = np.linspace(startingYear, endingYear, count)
 y1 = np.array(car3Values)
 y2 = np.array(car3Values)
 y3 = np.array(car3Values)
