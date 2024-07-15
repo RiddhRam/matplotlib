@@ -1,4 +1,4 @@
-from moviepy.editor import VideoFileClip, CompositeVideoClip, TextClip, ColorClip
+from moviepy.editor import VideoFileClip, CompositeVideoClip, TextClip
 import csv
 
 def read_csv_file(file_path, string, items):

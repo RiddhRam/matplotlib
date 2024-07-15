@@ -19,11 +19,11 @@ def interpolate_data(x, y, num_points):
 
 startingYear = 2024 # Place Holder
 endingYear = 2044 # Place Holder
-frames = 360
+frames = 420
 
 car1ImageName = ''
 car2ImageName = ''
-car3ImageName = 'Mini'
+car3ImageName = 'Mercedes-AMG'
 
 # Not used here but still used in multiple files
 car1 = '' # Place Holder
@@ -71,7 +71,7 @@ backgroundColor = '#282c44'
 
 carColor1 = '#282c44'
 carColor2 = '#282c44'
-carColor3 = '#4ca0d7'
+carColor3 = '#9900ff'
 
 # Data from the spreadsheet
 x = np.linspace(startingYear, endingYear, count)
