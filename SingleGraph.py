@@ -32,20 +32,14 @@ startingYear = read_csv_file('startingYear.csv', False, 1)
 endingYear = read_csv_file('endingYear.csv', False, 1)
 frames = read_csv_file('frames.csv', False, 1)
 
-car1 = read_csv_file('car1.csv', True, 1)
-car2 = read_csv_file('car2.csv', True, 1)
-car3 = read_csv_file('car3.csv', True, 1)
+car = read_csv_file('car3.csv', True, 1)
 
 carImageName = read_csv_file('car3ImageName.csv', True, 1)
 
-car1Color = read_csv_file('car1Color.csv', True, 1)
-car2Color = read_csv_file('car2Color.csv', True, 1)
-car3Color = read_csv_file('car3Color.csv', True, 1)
+carColor = read_csv_file('car3Color.csv', True, 1)
 
 # Original data points
 x_interp = read_csv_file('x_interp.csv', False, 2)
-y1_interp = read_csv_file('y1_interp.csv', False, 2)
-y2_interp = read_csv_file('y2_interp.csv', False, 2)
 y3_interp = read_csv_file('y3_interp.csv', False, 2)
 
 #plt.style.use({"axes.facecolor": "#282c44"})
@@ -71,15 +65,13 @@ ax.spines['top'].set_color('black')
 ax.spines['left'].set_color('black')
 ax.spines['right'].set_color('black')
 
-# Colors for the lines
+# Color for the line
 colors = [
-    car1Color,  # Car 1
-    car2Color,  # Car 2
-    car3Color,  # Car 3
+    carColor,  # Car 3
 ]
 
 # Combine into a data frame and then we will plot it
-df = pd.DataFrame({car1: y1_interp, car2: y2_interp, car3: y3_interp, 'x':x_interp})
+df = pd.DataFrame({car: y3_interp, 'x':x_interp})
 
 # Format the y-axis labels to show the dollar sign
 formatter = FuncFormatter(lambda x, _: f'${x:,.0f}')
@@ -91,14 +83,14 @@ def animate(i):
     ax.clear()
 
     # Set data for the next frame for the lines
-    df = pd.DataFrame({car1: y1_interp[:i], car2: y2_interp[:i], car3: y3_interp[:i], 'x':x_interp[:i]})
+    df = pd.DataFrame({car: y3_interp[:i], 'x':x_interp[:i]})
 
     # Set fixed x and y axis limits
     ax.set_xlim(startingYear, endingYear)
     ax.set_ylim(0, maximumY)
 
     # Redraw the plot with updated data
-    lines = df.plot(x='x', y=[car1, car2, car3], linewidth=9, ax=ax, legend=False, color=colors)
+    lines = df.plot(x='x', y=[car], linewidth=9, ax=ax, legend=False, color=colors)
 
     # Hide by setting font size to 0 and colour to white
     # Hide these since they will be added in MainVideoMaker.py
@@ -121,7 +113,7 @@ def animate(i):
     for n in range(1, n_lines):
         df.plot(
                 x='x', 
-                y=[car1, car2, car3],
+                y=[car1, car2, car],
                 linewidth=9+(diff_linewidth*n),
                 alpha=alpha_value,
                 legend=False,
@@ -129,7 +121,7 @@ def animate(i):
                 color=colors)'''
 
     # Text annotations for each line
-    text = ax.text(startingYear, 0, car3, fontsize=16, color='#000', fontweight='bold')
+    text = ax.text(startingYear, 0, car, fontsize=16, color='#000', fontweight='bold')
 
     if i > 0:
         text.set_position((x_interp[i-1], y3_interp[i-1] + 1000))

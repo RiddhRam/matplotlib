@@ -24,6 +24,7 @@ def read_csv_file(file_path, string, items):
         return results
 
 carName = read_csv_file('car3.csv', True, 1)
+carColor = read_csv_file('car3Color.csv', True, 1)
 
 # Load videos
 GraphClip = VideoFileClip("GraphRaw.mp4")
@@ -48,7 +49,7 @@ print(str(totalWidth) + 'x' + str(totalHeight))
 solidColour = ColorClip(size=(totalWidth, totalHeight), color=(255, 255, 255), duration=resized_GraphClip.duration)
 
 # Title
-titleText = TextClip(carName + ' Price Predictions', font ="Arial-Bold", fontsize=50, color='#4ca0d7')
+titleText = TextClip(carName + ' Price Predictions', font ="Arial-Bold", fontsize=50, color=carColor)
 titleText = titleText.set_duration(resized_GraphClip.duration)
 
 # Calculate the horizontal center position for the title text
