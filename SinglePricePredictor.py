@@ -49,7 +49,7 @@ print(str(totalWidth) + 'x' + str(totalHeight))
 solidColour = ColorClip(size=(totalWidth, totalHeight), color=(255, 255, 255), duration=resized_GraphClip.duration)
 
 # Title
-titleText = TextClip(carName + ' Price Predictions', font ="Arial-Bold", fontsize=50, color=carColor)
+titleText = TextClip(carName + '\n Price Predictions', font ="Arial-Bold", fontsize=50, color=carColor)
 titleText = titleText.set_duration(resized_GraphClip.duration)
 
 # Calculate the horizontal center position for the title text
