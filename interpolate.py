@@ -23,7 +23,7 @@ frames = 480
 
 car1ImageName = ''
 car2ImageName = ''
-car3ImageName = 'Mitsubishi'
+car3ImageName = 'Alfa Romeo'
 
 # Not used here but still used in multiple files
 car1 = '' # Place Holder
@@ -60,10 +60,10 @@ with open('table_data.csv', 'r', newline='') as f:
 
 savedColors = [
     '#4ca0d7',  # SpecGauge
-    '#ff00ff',  # Neon Pink
+    '#FF10F0',  # Neon Pink
     '#ffff00',  # Neon Yellow
-    '#00ff00', # Neon Green
-    '#ff0000', # Neon red
+    '#39FF14', # Neon Green
+    '#ff3131', # Neon red
     '#9900ff' # Neon Purple
 ]
 
@@ -71,7 +71,7 @@ backgroundColor = '#282c44'
 
 carColor1 = '#282c44'
 carColor2 = '#282c44'
-carColor3 = '#9900ff'
+carColor3 = '#FF10F0'
 
 # Data from the spreadsheet
 x = np.linspace(startingYear, endingYear, count)
