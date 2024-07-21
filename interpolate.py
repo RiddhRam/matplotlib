@@ -23,7 +23,7 @@ frames = 480
 
 car1ImageName = ''
 car2ImageName = ''
-car3ImageName = 'Alpine'
+car3ImageName = 'Mercedes-Benz'
 
 # Not used here but still used in multiple files
 car1 = '' # Place Holder
