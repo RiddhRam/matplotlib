@@ -23,16 +23,17 @@ frames = 480
 
 car1ImageName = ''
 car2ImageName = ''
-car3ImageName = 'Mercedes-Benz'
+car3ImageName = 'Mazda'
 
 # Not used here but still used in multiple files
 car1 = '' # Place Holder
 car2 = '' # Place Holder
 car3 = '' # Place Holder
 
+# Not needed for single price predictor since no legend is used
 car1Model = 'Civic'
 car2Model = 'Camry'
-car3Model = 'Hilux9468903806'
+car3Model = 'Hilux'
 
 car3Values = []
 
@@ -61,7 +62,7 @@ with open('table_data.csv', 'r', newline='') as f:
 savedColors = [
     '#4ca0d7',  # SpecGauge
     '#FF10F0',  # Neon Pink
-    '#ffff00',  # Neon Yellow
+    '#F8FF00',  # Neon Yellow
     '#39FF14', # Neon Green
     '#ff3131', # Neon red
     '#9900ff' # Neon Purple
