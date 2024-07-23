@@ -1,4 +1,4 @@
-from moviepy.editor import VideoFileClip, CompositeVideoClip, ColorClip, TextClip
+from moviepy.editor import VideoFileClip, CompositeVideoClip, ColorClip, TextClip, ImageClip
 import csv
 
 def read_csv_file(file_path, string, items):
@@ -56,12 +56,20 @@ titleText = titleText.set_duration(resized_GraphClip.duration)
 titleWidth = titleText.size[0]
 titleCenterXPosition = (totalWidth - titleWidth) // 2
 
+# Logo Image
+logoClip = ImageClip("SpecGauge Logo Text.png")
+logoClip = logoClip.set_duration(resized_GraphClip.duration)
+logoClip = logoClip.resize(width=400)
+logoWidth = logoClip.size[0]
+logoCenterXPoisition = (totalWidth - logoWidth) // 2
+
 # Create a larger composite frame
 compositeClip = CompositeVideoClip([
-    solidColour.set_position((0, 0)),
-    resized_GraphClip.set_position((20, 180)), # Graph on the left
-    titleText.set_position((titleCenterXPosition, 400)),
+    solidColour.set_position((0, 0)), # Background
+    resized_GraphClip.set_position((20, 190)), # Graph on the left
+    titleText.set_position((titleCenterXPosition, 400)), # Title
     resized_CounterClip.set_position((805, 520)),  # Counter to the right of the graph
+    logoClip.set_position((logoCenterXPoisition, 20)) # Logo
 ], size=(totalWidth, totalHeight))  # Set composite size to match total width and graph's height
 
 # The last frame will be held for 1 second to display text

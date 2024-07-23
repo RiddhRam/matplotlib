@@ -26,7 +26,7 @@ def read_csv_file(file_path, string, items):
 
         return results
 
-maximumY = 33000
+maximumY = 43000
 
 startingYear = read_csv_file('startingYear.csv', False, 1)
 endingYear = read_csv_file('endingYear.csv', False, 1)
