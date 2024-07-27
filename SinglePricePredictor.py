@@ -25,6 +25,7 @@ def read_csv_file(file_path, string, items):
 
 carName = read_csv_file('car3.csv', True, 1)
 carColor = read_csv_file('car3Color.csv', True, 1)
+endingYear = read_csv_file('endingYear.csv', False, 1)
 
 # Load videos
 GraphClip = VideoFileClip("GraphRaw.mp4")
@@ -49,7 +50,7 @@ print(str(totalWidth) + 'x' + str(totalHeight))
 solidColour = ColorClip(size=(totalWidth, totalHeight), color=(255, 255, 255), duration=resized_GraphClip.duration)
 
 # Title
-titleText = TextClip(carName + '\n Price Predictions', font ="Arial-Bold", fontsize=50, color=carColor)
+titleText = TextClip("What will " + carName + '\n cost in ' + str(endingYear) + "?", font ="Arial-Bold", fontsize=50, color=carColor)
 titleText = titleText.set_duration(resized_GraphClip.duration)
 
 # Calculate the horizontal center position for the title text
@@ -72,12 +73,12 @@ compositeClip = CompositeVideoClip([
     logoClip.set_position((logoCenterXPoisition, 20)) # Logo
 ], size=(totalWidth, totalHeight))  # Set composite size to match total width and graph's height
 
-# The last frame will be held for 1 second to display text
+# The last frame will be held for 0.5 second to display text
 lastFrame = compositeClip.duration - 1/60
-lastFrameClip = compositeClip.to_ImageClip(t=lastFrame, duration=1)
+lastFrameClip = compositeClip.to_ImageClip(t=lastFrame, duration=0.5)
 
 # Have to write it then bring it back as a video or it won't work
 lastFrameClip.write_videofile("LastFrame.mp4", codec="libx265", fps=60, bitrate="5000k", audio=False)
 
 # Save the main video
-compositeClip.write_videofile("MainVideo.mp4", codec="libx265", fps=60, bitrate="5000k", audio=False)
+#compositeClip.write_videofile("MainVideo.mp4", codec="libx265", fps=60, bitrate="5000k", audio=False)
