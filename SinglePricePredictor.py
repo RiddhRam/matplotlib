@@ -81,4 +81,4 @@ lastFrameClip = compositeClip.to_ImageClip(t=lastFrame, duration=0.5)
 lastFrameClip.write_videofile("LastFrame.mp4", codec="libx265", fps=60, bitrate="5000k", audio=False)
 
 # Save the main video
-#compositeClip.write_videofile("MainVideo.mp4", codec="libx265", fps=60, bitrate="5000k", audio=False)
+compositeClip.write_videofile("MainVideo.mp4", codec="libx265", fps=60, bitrate="5000k", audio=False)
