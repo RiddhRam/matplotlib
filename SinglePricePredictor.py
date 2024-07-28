@@ -74,7 +74,9 @@ compositeClip = CompositeVideoClip([
 ], size=(totalWidth, totalHeight))  # Set composite size to match total width and graph's height
 
 # The last frame will be held for 0.5 second to display text
-lastFrame = compositeClip.duration - 1/60
+# Have to use 0.02s = 1/50 frames
+# Not sure why video is in 50fps
+lastFrame = compositeClip.duration - 0.02
 lastFrameClip = compositeClip.to_ImageClip(t=lastFrame, duration=0.5)
 
 # Have to write it then bring it back as a video or it won't work
