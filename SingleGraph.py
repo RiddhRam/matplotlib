@@ -26,7 +26,16 @@ def read_csv_file(file_path, string, items):
 
         return results
 
-maximumY = 65000
+
+# Original data points
+x_interp = read_csv_file('x_interp.csv', False, 2)
+y3_interp = read_csv_file('y3_interp.csv', False, 2)
+# Manual set maximumY
+#maximumY = 33000
+
+# Automatically set maximumY 4k above the highest price
+print(max(y3_interp) + 4000)
+maximumY = max(y3_interp) + 4000
 
 startingYear = read_csv_file('startingYear.csv', False, 1)
 endingYear = read_csv_file('endingYear.csv', False, 1)
@@ -37,10 +46,6 @@ car = read_csv_file('car3.csv', True, 1)
 carImageName = read_csv_file('car3ImageName.csv', True, 1)
 
 carColor = read_csv_file('car3Color.csv', True, 1)
-
-# Original data points
-x_interp = read_csv_file('x_interp.csv', False, 2)
-y3_interp = read_csv_file('y3_interp.csv', False, 2)
 
 #plt.style.use({"axes.facecolor": "#282c44"})
 '''Available styles:
@@ -139,4 +144,4 @@ fig.figimage(image, xo=fig.bbox.xmax/2 - image.shape[1]/2, yo=fig.bbox.ymax - im
 # Save the animation
 ani.save('GraphRaw.mp4', fps=60, extra_args=['-vcodec', 'libx265', '-b:v', '10M'])
 
-#plt.show()
+plt.show()
