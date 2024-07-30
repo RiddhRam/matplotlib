@@ -34,7 +34,6 @@ y3_interp = read_csv_file('y3_interp.csv', False, 2)
 #maximumY = 33000
 
 # Automatically set maximumY 4k above the highest price
-print(max(y3_interp) + 4000)
 maximumY = max(y3_interp) + 4000
 
 startingYear = read_csv_file('startingYear.csv', False, 1)
@@ -144,4 +143,4 @@ fig.figimage(image, xo=fig.bbox.xmax/2 - image.shape[1]/2, yo=fig.bbox.ymax - im
 # Save the animation
 ani.save('GraphRaw.mp4', fps=60, extra_args=['-vcodec', 'libx265', '-b:v', '10M'])
 
-plt.show()
+#plt.show()

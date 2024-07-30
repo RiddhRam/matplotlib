@@ -1,6 +1,12 @@
 NOTES:
 After running graph.py, the x-axis and y-axis won't have any label,
 this is fixed after running MainVideoMaker.py since it draws the correct labels
+When selecting a frame count, make sure to factor in the length of the last clip which is 30 frames
+Also make sure the total frame count is 5 less than the next second for example:
+7 seconds and 55 frames is 5 frames less than 8 seconds
+This helps the video in the algorithm since it will they always round the time up,
+but in this case it will say 8 seconds, instead of 9 seconds, and the actual
+length isn't far off. At 7 seconds and 56 frames it will say 9 seconds
 
 For videos with 1 single line, set car colors 1 and 2 to #282c44 and make all data points the same
 If only 1 car, dont use the legend.py, use the text that follows the lines
