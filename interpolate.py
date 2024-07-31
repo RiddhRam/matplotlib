@@ -19,7 +19,7 @@ def interpolate_data(x, y, num_points):
 
 startingYear = 2024 # Place Holder
 endingYear = 2044 # Place Holder
-frames = 445
+frames = 475
 
 car1ImageName = ''
 car2ImageName = ''
