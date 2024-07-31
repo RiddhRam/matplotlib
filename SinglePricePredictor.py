@@ -50,7 +50,7 @@ print(str(totalWidth) + 'x' + str(totalHeight))
 solidColour = ColorClip(size=(totalWidth, totalHeight), color=(255, 255, 255), duration=resized_GraphClip.duration)
 
 # Title
-titleText = TextClip("What will " + carName + '\n cost in ' + str(endingYear) + "?", font ="Arial-Bold", fontsize=50, color=carColor)
+titleText = TextClip("What will " + carName + '\n cost in ' + str(endingYear) + "?", font ="Arial-Bold", fontsize=43, color=carColor)
 titleText = titleText.set_duration(resized_GraphClip.duration)
 
 # Calculate the horizontal center position for the title text
@@ -58,19 +58,19 @@ titleWidth = titleText.size[0]
 titleCenterXPosition = (totalWidth - titleWidth) // 2
 
 # Logo Image
-logoClip = ImageClip("SpecGauge Logo Text.png")
+'''logoClip = ImageClip("SpecGauge Logo Text.png")
 logoClip = logoClip.set_duration(resized_GraphClip.duration)
 logoClip = logoClip.resize(width=400)
 logoWidth = logoClip.size[0]
-logoCenterXPoisition = (totalWidth - logoWidth) // 2
+logoCenterXPoisition = (totalWidth - logoWidth) // 2'''
 
 # Create a larger composite frame
 compositeClip = CompositeVideoClip([
     solidColour.set_position((0, 0)), # Background
     resized_GraphClip.set_position((20, 190)), # Graph on the left
-    titleText.set_position((titleCenterXPosition, 400)), # Title
+    titleText.set_position((titleCenterXPosition, 420)), # Title
     resized_CounterClip.set_position((805, 520)),  # Counter to the right of the graph
-    logoClip.set_position((logoCenterXPoisition, 20)) # Logo
+    #logoClip.set_position((logoCenterXPoisition, 20)) # Logo
 ], size=(totalWidth, totalHeight))  # Set composite size to match total width and graph's height
 
 # The last frame will be held for 0.5 second to display text
