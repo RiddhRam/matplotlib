@@ -125,7 +125,7 @@ def animate(i):
                 color=colors)'''
 
     # Text annotations for each line
-    text = ax.text(startingYear, 0, car, fontsize=16, color='#000', fontweight='bold')
+    text = ax.text(startingYear, 0, car, fontsize=15, color='#000', fontweight='bold')
 
     if i > 0:
         text.set_position((x_interp[i-1], y3_interp[i-1] + 1000))
@@ -133,7 +133,7 @@ def animate(i):
     return lines, text
 
 # Margins from the right and top window edge
-plt.subplots_adjust(right=0.65, top=0.8)
+plt.subplots_adjust(right=0.72, top=0.8)
 # Create animation
 ani = animation.FuncAnimation(fig, animate, frames=frames, interval=1000/60)
 
