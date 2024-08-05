@@ -23,7 +23,7 @@ frames = 480
 
 car1ImageName = ''
 car2ImageName = ''
-car3ImageName = 'Hyundai'
+car3ImageName = 'GMC'
 
 # Not used here but still used in multiple files
 car1 = '' # Place Holder
@@ -72,7 +72,7 @@ backgroundColor = '#282c44'
 
 carColor1 = '#282c44'
 carColor2 = '#282c44'
-carColor3 = '#39FF14'
+carColor3 = '#ff3131'
 
 # Data from the spreadsheet
 x = np.linspace(startingYear, endingYear, count)

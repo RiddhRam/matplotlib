@@ -77,7 +77,7 @@ compositeClip = CompositeVideoClip([
 # Have to use 0.02s = 1/50 frames
 # Not sure why video is in 50fps
 lastFrame = compositeClip.duration - 0.02
-lastFrameClip = compositeClip.to_ImageClip(t=lastFrame, duration=0.5)
+lastFrameClip = compositeClip.to_ImageClip(t=lastFrame, duration=1)
 
 # Have to write it then bring it back as a video or it won't work
 lastFrameClip.write_videofile("LastFrame.mp4", codec="libx265", fps=60, bitrate="5000k", audio=False)
