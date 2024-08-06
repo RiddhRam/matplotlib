@@ -72,7 +72,7 @@ backgroundColor = '#282c44'
 
 carColor1 = '#282c44'
 carColor2 = '#282c44'
-carColor3 = '#ff3131'
+carColor3 = '#FF10F0'
 
 # Data from the spreadsheet
 x = np.linspace(startingYear, endingYear, count)
