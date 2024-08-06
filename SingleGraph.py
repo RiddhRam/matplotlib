@@ -89,9 +89,7 @@ def animate(i):
     # Set data for the next frame for the lines
     df = pd.DataFrame({car: y3_interp[:i], 'x':x_interp[:i]})
 
-    # Set fixed x and y axis limits
-    ax.set_xlim(startingYear, endingYear)
-    ax.set_ylim(0, maximumY)
+    #ax.set_ylim(0, maximumY)
 
     # Redraw the plot with updated data
     lines = df.plot(x='x', y=[car], linewidth=9, ax=ax, legend=False, color=colors)
@@ -133,7 +131,7 @@ def animate(i):
     return lines, text
 
 # Margins from the right and top window edge
-plt.subplots_adjust(right=0.65, top=0.8)
+plt.subplots_adjust(right=0.68, top=0.8)
 # Create animation
 ani = animation.FuncAnimation(fig, animate, frames=frames, interval=1000/60)
 

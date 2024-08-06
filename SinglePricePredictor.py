@@ -32,13 +32,13 @@ GraphClip = VideoFileClip("GraphRaw.mp4")
 CounterClip = VideoFileClip("CounterRaw.mp4")
 
 # Cropping
-counterX1, counterY1 = 450, 400  # top-left corner - counter
-counterX2, counterY2 = 850, 550  # bottom-right corner - counter
+counterX1, counterY1 = 400, 190  # top-left corner - counter
+counterX2, counterY2 = 910, 720  # bottom-right corner - counter
 cropped_CounterClip = CounterClip.crop(x1=counterX1, y1=counterY1, x2=counterX2, y2=counterY2)
 
 # Resizing
 resized_GraphClip = GraphClip.resize(width=1060)
-resized_CounterClip = cropped_CounterClip.resize(width=181)
+resized_CounterClip = cropped_CounterClip.resize(width=141)
 
 # Calculate total width needed
 totalWidth = 1080
@@ -69,7 +69,7 @@ compositeClip = CompositeVideoClip([
     solidColour.set_position((0, 0)), # Background
     resized_GraphClip.set_position((20, 190)), # Graph on the left
     titleText.set_position((titleCenterXPosition, 420)), # Title
-    resized_CounterClip.set_position((805, 520)),  # Counter to the right of the graph
+    resized_CounterClip.set_position((840, 520)),  # Counter to the right of the graph
     #logoClip.set_position((logoCenterXPoisition, 20)) # Logo
 ], size=(totalWidth, totalHeight))  # Set composite size to match total width and graph's height
 
