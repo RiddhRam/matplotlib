@@ -65,8 +65,8 @@ followCenterXPosition = (totalWidth - followWidth) // 2
 
 # Set the positions
 lastFrameClip = lastFrameClip.set_position((0, 0))
-pricesText = pricesText.set_position((pricesCenterXPosition - 70, 1475))
-followText = followText.set_position((followCenterXPosition - 70, 1575))
+pricesText = pricesText.set_position((pricesCenterXPosition - 100, 1475))
+followText = followText.set_position((followCenterXPosition - 100, 1575))
 
 lastFrameWithText = CompositeVideoClip([lastFrameClip, followText, pricesText], size=(totalWidth, totalHeight))
 lastFrameWithText.write_videofile("LastFrameFinal.mp4", codec="libx265", fps=60, bitrate="6000k", audio=False)
