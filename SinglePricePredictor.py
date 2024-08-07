@@ -33,11 +33,11 @@ CounterClip = VideoFileClip("CounterRaw.mp4")
 
 # Cropping
 counterX1, counterY1 = 400, 190  # top-left corner - counter
-counterX2, counterY2 = 910, 720  # bottom-right corner - counter
+counterX2, counterY2 = 925, 720  # bottom-right corner - counter
 cropped_CounterClip = CounterClip.crop(x1=counterX1, y1=counterY1, x2=counterX2, y2=counterY2)
 
 # Resizing
-resized_GraphClip = GraphClip.resize(width=1060)
+resized_GraphClip = GraphClip.resize(width=1080)
 resized_CounterClip = cropped_CounterClip.resize(width=141)
 
 # Calculate total width needed

@@ -47,6 +47,7 @@ totalHeight = 1920
 pricesText = TextClip(car1Model + ": $" + str(car1FinalPrice) + "\n" + car2Model + ": $" + str(car2FinalPrice) + "\n" + car3Model + ": $" + str(car3FinalPrice)
                       , font ="Arial-Bold", fontsize=40, color='black')
 
+# It's this color if I'm only using a single line
 if car1Color == '#282c44':
     pricesText = TextClip("Average Price in " + str(endingYear) + ": $" + str(car3FinalPrice), font ="Arial-Bold", fontsize=35, color='black')
     
@@ -65,8 +66,8 @@ followCenterXPosition = (totalWidth - followWidth) // 2
 
 # Set the positions
 lastFrameClip = lastFrameClip.set_position((0, 0))
-pricesText = pricesText.set_position((pricesCenterXPosition - 100, 1475))
-followText = followText.set_position((followCenterXPosition - 100, 1575))
+pricesText = pricesText.set_position((pricesCenterXPosition - 90, 1475))
+followText = followText.set_position((followCenterXPosition - 90, 1575))
 
 lastFrameWithText = CompositeVideoClip([lastFrameClip, followText, pricesText], size=(totalWidth, totalHeight))
 lastFrameWithText.write_videofile("LastFrameFinal.mp4", codec="libx265", fps=60, bitrate="6000k", audio=False)
