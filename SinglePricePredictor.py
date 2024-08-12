@@ -32,8 +32,8 @@ GraphClip = VideoFileClip("GraphRaw.mp4")
 CounterClip = VideoFileClip("CounterRaw.mp4")
 
 # Cropping
-counterX1, counterY1 = 400, 190  # top-left corner - counter
-counterX2, counterY2 = 925, 720  # bottom-right corner - counter
+counterX1, counterY1 = 360, 190  # top-left corner - counter
+counterX2, counterY2 = 960, 720  # bottom-right corner - counter
 cropped_CounterClip = CounterClip.crop(x1=counterX1, y1=counterY1, x2=counterX2, y2=counterY2)
 
 # Resizing
