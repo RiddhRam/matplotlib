@@ -32,8 +32,8 @@ GraphClip = VideoFileClip("GraphRaw.mp4")
 CounterClip = VideoFileClip("CounterRaw.mp4")
 
 # Cropping
-counterX1, counterY1 = 360, 190  # top-left corner - counter
-counterX2, counterY2 = 960, 720  # bottom-right corner - counter
+counterX1, counterY1 = 490, 420  # top-left corner - counter
+counterX2, counterY2 = 830, 525  # bottom-right corner - counter
 cropped_CounterClip = CounterClip.crop(x1=counterX1, y1=counterY1, x2=counterX2, y2=counterY2)
 
 # Resizing
@@ -67,9 +67,9 @@ logoCenterXPoisition = (totalWidth - logoWidth) // 2'''
 # Create a larger composite frame
 compositeClip = CompositeVideoClip([
     solidColour.set_position((0, 0)), # Background
-    resized_GraphClip.set_position((20, 190)), # Graph on the left
+    resized_GraphClip.set_position((20, 210)), # Graph on the left
     titleText.set_position((titleCenterXPosition, 420)), # Title
-    resized_CounterClip.set_position((840, 520)),  # Counter to the right of the graph
+    resized_CounterClip.set_position((860, 520)),  # Counter to the right of the graph
     #logoClip.set_position((logoCenterXPoisition, 20)) # Logo
 ], size=(totalWidth, totalHeight))  # Set composite size to match total width and graph's height
 

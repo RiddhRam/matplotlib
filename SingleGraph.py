@@ -65,9 +65,9 @@ ax.tick_params(axis='y', colors='black')
 
 # Set the border color of the plot
 ax.spines['bottom'].set_color('black')
-ax.spines['top'].set_color('black')
+ax.spines['top'].set_color('none')
 ax.spines['left'].set_color('black')
-ax.spines['right'].set_color('black')
+ax.spines['right'].set_color('none')
 
 # Color for the line
 colors = [
@@ -123,10 +123,10 @@ def animate(i):
                 color=colors)'''
 
     # Text annotations for each line
-    text = ax.text(startingYear, 0, car, fontsize=16, color='#000', fontweight='bold')
+    text = ax.text(startingYear, 0, car + "\n" + "$" + str(round(y3_interp[i])), fontsize=16, color='#000', fontweight='bold')
 
     if i > 0:
-        text.set_position((x_interp[i-1], y3_interp[i-1] + 1000))
+        text.set_position((x_interp[i-20]-0.02*i, y3_interp[i-1] + 1000))
 
     return lines, text
 
