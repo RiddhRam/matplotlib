@@ -69,7 +69,7 @@ compositeClip = CompositeVideoClip([
     solidColour.set_position((0, 0)), # Background
     resized_GraphClip.set_position((20, 210)), # Graph on the left
     titleText.set_position((titleCenterXPosition, 420)), # Title
-    resized_CounterClip.set_position((860, 520)),  # Counter to the right of the graph
+    resized_CounterClip.set_position((865, 420)),  # Counter to the right of the graph
     #logoClip.set_position((logoCenterXPoisition, 20)) # Logo
 ], size=(totalWidth, totalHeight))  # Set composite size to match total width and graph's height
 

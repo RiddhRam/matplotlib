@@ -126,7 +126,7 @@ def animate(i):
     text = ax.text(startingYear, 0, car + "\n" + "$" + str(round(y3_interp[i])), fontsize=16, color='#000', fontweight='bold')
 
     if i > 0:
-        text.set_position((x_interp[i-20]-0.02*i, y3_interp[i-1] + 1000))
+        text.set_position((x_interp[i], y3_interp[i-1]))
 
     return lines, text
 
