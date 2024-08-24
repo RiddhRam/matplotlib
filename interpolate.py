@@ -3,12 +3,17 @@ from scipy.interpolate import interp1d
 import csv
 
 def write_csv_file(path, data, items):
-    with open(path, 'w', newline='') as f:
+    with open(path, 'w') as f:
         writer = csv.writer(f)
         if items == 1:
             writer.writerow([data])
         else:
             writer.writerows([data])
+
+def writeTxt(path, data):
+    with open(path, 'w') as file:
+        # Write data to the file
+        file.write(data)
 
 # Interpolation function
 def interpolate_data(x, y, num_points):
@@ -23,7 +28,7 @@ frames = 500
 
 car1ImageName = ''
 car2ImageName = ''
-car3ImageName = 'KTM'
+car3ImageName = 'Porsche'
 
 # Not used here but still used in multiple files
 car1 = '' # Place Holder
@@ -89,7 +94,7 @@ _, y3_interp = interpolate_data(x, y3, frames)
 write_csv_file('startingYear.csv', startingYear, 1)
 
 # Write endingYear
-write_csv_file('endingYear.csv', endingYear, 1)
+writeTxt('endingYear.txt', str(endingYear))
 
 # Write frames
 write_csv_file('frames.csv', frames, 1)
@@ -131,13 +136,13 @@ write_csv_file('car2Model.csv', car2Model, 1)
 write_csv_file('car3Model.csv', car3Model, 1)
 
 # Write car1 final price
-write_csv_file('car1FinalPrice.csv', y1[-1], 1)
+writeTxt('car1FinalPrice.txt', str(round(y1[-1])))
 
 # Write car2 final price
-write_csv_file('car2FinalPrice.csv', y2[-1], 1)
+writeTxt('car2FinalPrice.txt', str(round(y2[-1])))
 
 # Write car3 final price
-write_csv_file('car3FinalPrice.csv', y3[-1], 1)
+writeTxt('car3FinalPrice.txt', str(round(y3[-1])))
 
 # Write x_interp
 write_csv_file('x_interp.csv', x_interp, 2)

@@ -26,6 +26,10 @@ def read_csv_file(file_path, string, items):
 
         return results
 
+def readTxt(file_path):
+    with open(file_path, 'r') as file:
+        content = file.read()
+        return content
 
 # Original data points
 x_interp = read_csv_file('x_interp.csv', False, 2)
@@ -37,7 +41,7 @@ y3_interp = read_csv_file('y3_interp.csv', False, 2)
 maximumY = max(y3_interp) + 1800
 
 startingYear = read_csv_file('startingYear.csv', False, 1)
-endingYear = read_csv_file('endingYear.csv', False, 1)
+endingYear = readTxt('endingYear.txt')
 frames = read_csv_file('frames.csv', False, 1)
 
 car = read_csv_file('car3.csv', True, 1)
@@ -131,7 +135,7 @@ def animate(i):
     return lines, text
 
 # Margins from the right and top window edge
-plt.subplots_adjust(right=0.66, top=0.8, left=0.15)
+plt.subplots_adjust(right=0.66, top=0.8, left=0.2)
 # Create animation
 ani = animation.FuncAnimation(fig, animate, frames=frames, interval=1000/60)
 
@@ -139,6 +143,6 @@ ani = animation.FuncAnimation(fig, animate, frames=frames, interval=1000/60)
 fig.figimage(image, xo=fig.bbox.xmax/2 - image.shape[1]/2, yo=fig.bbox.ymax - image.shape[0], zorder=1)
 
 # Save the animation
-ani.save('GraphRaw.mp4', fps=60, extra_args=['-vcodec', 'libx265', '-b:v', '10M'])
+ani.save('GraphRaw.mp4', fps=60, extra_args=['-vcodec', 'libx264', '-b:v', '10M'])
 
 #plt.show()
