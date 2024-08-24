@@ -131,7 +131,7 @@ def animate(i):
     return lines, text
 
 # Margins from the right and top window edge
-plt.subplots_adjust(right=0.68, top=0.8)
+plt.subplots_adjust(right=0.66, top=0.8, left=0.15)
 # Create animation
 ani = animation.FuncAnimation(fig, animate, frames=frames, interval=1000/60)
 
