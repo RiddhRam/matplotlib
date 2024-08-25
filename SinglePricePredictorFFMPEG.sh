@@ -13,6 +13,8 @@ endingYear=$(awk -F, 'NR==1 {print $1}' endingYear.txt)
 
 finalPrice=$(awk -F, 'NR==1 {print $1}' car3FinalPrice.txt)
 
+
+<< COMMENT
 # Make Car Name Title Video
 ffmpeg -f lavfi -y -i color=c=white:s=1080x80:d=8.3334 -vf "drawtext=text='$car3':fontcolor=$carColor:fontsize=48:x=(w-text_w)/2:0" \-t 8.3334 -r 60 TextVideoName.mp4
 
@@ -43,5 +45,9 @@ ffmpeg -y -i LastFrame.png -i LastFrameText.png -filter_complex "overlay=x=260:y
 # Make the LastFrameFinal.png into a 1 second long video
 ffmpeg -loop 1 -y -i LastFrameFinal.png -c:v libx264 -t 1 -pix_fmt yuv420p -r 60 LastFrameFinal.mp4
 
+COMMENT
+
 # Concatenate LastFrameFinal.mp4 to MainVideo.mp4
-ffmpeg -y -f concat -i concatVideos.txt -c copy FinalVideo.mp4
+#ffmpeg -y -f concat -i concatVideos.txt -c copy FinalVideoUntrimmed.mp4
+
+ffmpeg -ss 0.43334 -y -i FinalVideoUntrimmed.mp4 -c:v libx264 -c:a aac FinalVideo.mp4
