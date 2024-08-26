@@ -40,6 +40,9 @@ def update_text(i):
 # Create a figure and axis
 fig, ax = plt.subplots()
 
+# Use a light gray background so it's easier on the eyes
+fig.patch.set_facecolor("#D3D3D3")
+
 # Hide the axis
 ax.axis('off')
 

@@ -50,7 +50,8 @@ carImageName = read_csv_file('car3ImageName.csv', True, 1)
 
 carColor = read_csv_file('car3Color.csv', True, 1)
 
-#plt.style.use({"axes.facecolor": "#282c44"})
+# Use a light gray background so it's easier on the eyes
+plt.style.use({"axes.facecolor": "#D3D3D3"})
 '''Available styles:
 ['Solarize_Light2', '_classic_test_patch', '_mpl-gallery', '_mpl-gallery-nogrid', 'bmh', 'classic', 'dark_background', 
 'fast', 'fivethirtyeight', 'ggplot', 'grayscale', 'seaborn-v0_8', 'seaborn-v0_8-bright', 'seaborn-v0_8-colorblind', 
@@ -63,20 +64,18 @@ fig, ax = plt.subplots()
 # Size of the graph in inches
 fig.set_size_inches(9, 14)
 
+# Use a light gray background so it's easier on the eyes
+fig.patch.set_facecolor("#D3D3D3")
+
 # Adjust tick labels color
-ax.tick_params(axis='x', colors='black')
-ax.tick_params(axis='y', colors='black')
+ax.tick_params(axis='x', color='black')
+ax.tick_params(axis='y', color='black')
 
 # Set the border color of the plot
 ax.spines['bottom'].set_color('black')
 ax.spines['top'].set_color('none')
 ax.spines['left'].set_color('black')
 ax.spines['right'].set_color('none')
-
-# Color for the line
-colors = [
-    carColor,  # Car 3
-]
 
 # Combine into a data frame and then we will plot it
 df = pd.DataFrame({car: y3_interp, 'x':x_interp})
@@ -96,7 +95,7 @@ def animate(i):
     #ax.set_ylim(0, maximumY)
 
     # Redraw the plot with updated data
-    lines = df.plot(x='x', y=[car], linewidth=9, ax=ax, legend=False, color=colors)
+    lines = df.plot(x='x', y=[car], linewidth=9, ax=ax, legend=False, color=carColor)
 
     # Hide by setting font size to 0 and colour to white
     # Hide these since they will be added in MainVideoMaker.py
@@ -119,15 +118,15 @@ def animate(i):
     for n in range(1, n_lines):
         df.plot(
                 x='x', 
-                y=[car1, car2, car],
+                y=[car],
                 linewidth=9+(diff_linewidth*n),
                 alpha=alpha_value,
                 legend=False,
                 ax=ax,
-                color=colors)'''
+                color=carColor)'''
 
     # Text annotations for each line
-    text = ax.text(startingYear, 0, car + "\n" + "$" + str(round(y3_interp[i])), fontsize=16, color='#000', fontweight='bold')
+    text = ax.text(startingYear, 0, car + "\n" + "$" + str(round(y3_interp[i])), fontsize=14, color='#000', fontweight='bold')
 
     if i > 0:
         text.set_position((x_interp[i], y3_interp[i-1]))
