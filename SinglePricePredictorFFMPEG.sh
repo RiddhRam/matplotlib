@@ -12,11 +12,12 @@ endingYear=$(awk -F, 'NR==1 {print $1}' endingYear.txt)
 
 finalPrice=$(awk -F, 'NR==1 {print $1}' car3FinalPrice.txt)
 
+# We use #D5D5D5 for the background here because the compression/codec affects the color, and #D5D5D5 becomes #D3D3D3, but #D3D3D3 becomes #D0D0D0
 # Make Car Name Title Video
-ffmpeg -f lavfi -y -i color=c='D3D3D3':s=1080x100:d=8.3334 -vf "drawtext=text='$car3':fontcolor=$carColor:fontsize=48:x=(w-text_w)/2:y=0" -frames:v 1 TextVideoName.png
+ffmpeg -f lavfi -y -i color=c='D5D5D5':s=1080x100:d=8.3334 -vf "drawtext=text='$car3':fontcolor=$carColor:fontsize=48:x=(w-text_w)/2:y=0" -frames:v 1 TextVideoName.png
 
 # Make Last Part Of Title 
-ffmpeg -f lavfi -y -i color=c='D3D3D3':s=1080x40:d=8.3334 -vf "drawtext=text='Price Predictions':fontcolor=$carColor:fontsize=48:x=(w-text_w)/2:y=(h-text_h)/2" -frames:v 1 TextVideoEnd.png
+ffmpeg -f lavfi -y -i color=c='D5D5D5':s=1080x40:d=8.3334 -vf "drawtext=text='Price Predictions':fontcolor=$carColor:fontsize=48:x=(w-text_w)/2:y=(h-text_h)/2" -frames:v 1 TextVideoEnd.png
 
 # Overlay the above 2 Images
 ffmpeg -loop 1 -y -i TextVideoName.png -i TextVideoEnd.png -filter_complex "[0:v][1:v]overlay=0:60" -t 8.3334 -r 60 TextVideoTitle.mp4
