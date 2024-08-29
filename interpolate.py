@@ -17,10 +17,14 @@ def writeTxt(path, data):
 
 # Interpolation function
 def interpolate_data(x, y, num_points):
-    f = interp1d(x, y, kind='cubic')
-    x_new = np.linspace(x.min(), x.max(), num_points)
-    y_new = f(x_new)
-    return x_new, y_new
+    # May not always have 3 cars, this returns empty array if we don't have that car
+    try:
+        f = interp1d(x, y, kind='cubic')
+        x_new = np.linspace(x.min(), x.max(), num_points)
+        y_new = f(x_new)
+        return x_new, y_new
+    except:
+        return [], []
 
 startingYear = 2024 # Place Holder
 endingYear = 2044 # Place Holder
@@ -28,7 +32,7 @@ frames = 500
 
 car1ImageName = ''
 car2ImageName = ''
-car3ImageName = 'Audi RS'
+car3ImageName = 'Maserati'
 
 # Not used here but still used in multiple files
 car1 = '' # Place Holder
@@ -40,10 +44,12 @@ car1Model = 'Civic'
 car2Model = 'Camry'
 car3Model = 'Hilux'
 
-car3Values = []
-
 # Count the number of years to show
 count = 0
+
+car1Values = []
+car2Values = []
+car3Values = []
 
 with open('table_data.csv', 'r', newline='') as f:
     reader = csv.reader(f)
@@ -51,8 +57,31 @@ with open('table_data.csv', 'r', newline='') as f:
     last_row = None
     for index, row in enumerate(reader):
         if index == 0:
+            # May not always have a third car
+            try:
+                car1 = row[3]
+            except:
+                pass
+
+            # May not always have a second car
+            try:
+                car2 = row[2]
+            except:
+                pass
+
             car3 = row[1]
         else:
+            # Saem logic as above
+            try:
+                car1Values.append(float(row[3]))
+            except:
+                pass
+
+            try:
+                car2Values.append(float(row[2]))
+            except:
+                pass
+
             car3Values.append(float(row[1]))
             if index == 1:
                 startingYear = int(row[0])
@@ -69,26 +98,31 @@ savedColors = [
     '#FF10F0',  # Neon Pink - VERY GOOD
     '#F8FF00',  # Neon Yellow
     '#39FF14', # Neon Green - NOT SO GOOD
-    '#FC0B0B', # Neon red
+    '#FC0B0B', # Neon red - OKAY
     '#9900FF' # Neon Purple
 ]
 
 backgroundColor = '#282c44'
 
 carColor1 = '#282c44'
-carColor2 = '#282c44'
+carColor2 = '#4ca0d7'
 carColor3 = '#FC0B0B'
 
 # Data from the spreadsheet
 x = np.linspace(startingYear, endingYear, count)
-y1 = np.array(car3Values)
-y2 = np.array(car3Values)
+
+# May not always have a third car
+y1 = np.array(car1Values)
+
+# May not always have a second car
+y2 = np.array(car2Values)
+
 y3 = np.array(car3Values)
 
 # Interpolate the data
-x_interp, y1_interp = interpolate_data(x, y1, frames)
+_, y1_interp = interpolate_data(x, y1, frames)
 _, y2_interp = interpolate_data(x, y2, frames)
-_, y3_interp = interpolate_data(x, y3, frames)
+x_interp, y3_interp = interpolate_data(x, y3, frames)
 
 # Write startingYear
 write_csv_file('startingYear.csv', startingYear, 1)
@@ -136,10 +170,18 @@ write_csv_file('car2Model.csv', car2Model, 1)
 write_csv_file('car3Model.csv', car3Model, 1)
 
 # Write car1 final price
-writeTxt('car1FinalPrice.txt', str(round(y1[-1])))
+# fails if no third car
+try:
+    writeTxt('car1FinalPrice.txt', str(round(y1[-1])))
+except:
+    pass
 
 # Write car2 final price
-writeTxt('car2FinalPrice.txt', str(round(y2[-1])))
+# fails if no second car
+try:
+    writeTxt('car2FinalPrice.txt', str(round(y2[-1])))
+except:
+    pass
 
 # Write car3 final price
 writeTxt('car3FinalPrice.txt', str(round(y3[-1])))
