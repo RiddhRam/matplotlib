@@ -32,7 +32,12 @@ frames = 500
 
 car1ImageName = ''
 car2ImageName = ''
-car3ImageName = 'Maserati'
+car3ImageName = 'Lexus'
+
+# Shorter names to fit on the graph
+car1GraphName = ''
+car2GraphName = ''
+car3GraphName = 'LFA'
 
 # Not used here but still used in multiple files
 car1 = '' # Place Holder
@@ -106,7 +111,7 @@ backgroundColor = '#282c44'
 
 carColor1 = '#282c44'
 carColor2 = '#4ca0d7'
-carColor3 = '#FC0B0B'
+carColor3 = '#4ca0d7'
 
 # Data from the spreadsheet
 x = np.linspace(startingYear, endingYear, count)
@@ -141,6 +146,15 @@ write_csv_file('car2ImageName.csv', car2ImageName, 1)
 
 # Write car3ImageName
 write_csv_file('car3ImageName.csv', car3ImageName, 1)
+
+# Write car1GraphName
+write_csv_file('car1GraphName.csv', car1GraphName, 1)
+
+# Write car2GraphName
+write_csv_file('car2GraphName.csv', car2GraphName, 1)
+
+# Write car3GraphName
+write_csv_file('car3GraphName.csv', car3GraphName, 1)
 
 # Write car1
 write_csv_file('car1.csv', car1, 1)

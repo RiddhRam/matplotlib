@@ -45,5 +45,5 @@ ffmpeg -loop 1 -y -i LastFrameFinal.png -c:v libx264 -t 1 -pix_fmt yuv420p -r 60
 # Concatenate LastFrameFinal.mp4 to MainVideo.mp4
 ffmpeg -y -f concat -i concatVideos.txt -c copy FinalVideoUntrimmed.mp4
 
-# Trim the first 26 frames
-ffmpeg -ss 0.43334 -y -i FinalVideoUntrimmed.mp4 -c:v libx264 FinalVideo.mp4
+# Trim the first 32 frames
+ffmpeg -ss 0.53334 -y -i FinalVideoUntrimmed.mp4 -c:v libx264 FinalVideo.mp4

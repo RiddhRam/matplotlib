@@ -44,7 +44,7 @@ startingYear = read_csv_file('startingYear.csv', False, 1)
 endingYear = readTxt('endingYear.txt')
 frames = read_csv_file('frames.csv', False, 1)
 
-car = read_csv_file('car3.csv', True, 1)
+car = read_csv_file('car3GraphName.csv', True, 1)
 
 carImageName = read_csv_file('car3ImageName.csv', True, 1)
 
@@ -85,14 +85,30 @@ formatter = FuncFormatter(lambda x, _: f'${x:,.0f}')
 
 image = plt.imread('Logos/' + carImageName + '.png')
 
+'''
+# Milestones to record
+milestones = []
+
+# Interval to record milestones on
+milestoneLimit = round(y3_interp[0], -3)/3
+'''
+
+# Concave down points to record
+conDown = []
+
+# Concave up points to record
+conUp = []
+
+# Intervals to record concave points on
+conYLimit = round(y3_interp[0], -3) / 15
+conXLimit = 4
+
 # Animation function
 def animate(i):
     ax.clear()
 
     # Set data for the next frame for the lines
     df = pd.DataFrame({car: y3_interp[:i], 'x':x_interp[:i]})
-
-    #ax.set_ylim(0, maximumY)
 
     # Redraw the plot with updated data
     lines = df.plot(x='x', y=[car], linewidth=9, ax=ax, legend=False, color=carColor)
@@ -123,7 +139,58 @@ def animate(i):
                 alpha=alpha_value,
                 legend=False,
                 ax=ax,
-                color=carColor)'''
+                color=carColor)
+    
+    # Tracks if this milestone was recorded
+    savedMilestone = False
+
+    # Check for previously recorded milestones
+    for milestone in milestones:
+        # Check above and below current milestone (and and subtract 1 to stay away from next milestone)
+        # If new milestone is within this range, it was already recorded
+        if milestone[1] + milestoneLimit - 1 >= y3_interp[i] and milestone[1] - milestoneLimit + 1 <= y3_interp[i]:
+            savedMilestone = True
+            break
+
+    # If passed milestone limit, and not pre recorded, then record it
+    if y3_interp[i] >= y3_interp[0] + milestoneLimit and not savedMilestone:
+                milestones.append([i, y3_interp[i]])
+    
+    '''
+    
+    # If not the first or last frame
+    if i != 0 and i != frames - 1:
+        # tracks whether or not a similar point was saved
+        savedCon = False
+        # Check if next and last frame had a higher value, if so this is Concave Up
+        if y3_interp[i-1] >= y3_interp[i] + 2 and y3_interp[i+1] >= y3_interp[i] + 2:
+            # Check if this point is too close to another similar point
+            for point in conUp:
+                if point[0] + conXLimit > x_interp[i] and point[1] + conYLimit - 1 >= y3_interp[i] and point[1] - conYLimit + 1 <= y3_interp[i]:
+                    savedCon = True
+                    break
+
+            # If not similar then save
+            if not savedCon:
+                conUp.append([x_interp[i], y3_interp[i]])
+        # Check if next and last frame had a higher value, if so this is Concave Down
+        elif y3_interp[i-1] <= y3_interp[i] + 2 and y3_interp[i+1] <= y3_interp[i] + 2:
+            # Same as above
+            for point in conDown:
+                if point[0] + conXLimit > x_interp[i] and point[1] + conYLimit - 1 >= y3_interp[i] and point[1] - conYLimit + 1 <= y3_interp[i]:
+                    savedCon = True
+                    break
+
+            if not savedCon:
+                conDown.append([x_interp[i], y3_interp[i]])
+    
+    for point in conDown:
+        ax.text(point[0], point[1], " $" + str(round(point[1])), fontsize=14, color='green', fontweight='bold')
+        ax.scatter(point[0], point[1], color='green', s=30, zorder=5)
+
+    for point in conUp:
+        ax.text(point[0], point[1], " $" + str(round(point[1])), fontsize=14, color='red', fontweight='bold')
+        ax.scatter(point[0], point[1], color='red', s=30, zorder=5)
 
     # Text annotations for each line
     text = ax.text(startingYear, 0, car + "\n" + "$" + str(round(y3_interp[i])), fontsize=14, color='#000', fontweight='bold')
@@ -134,7 +201,7 @@ def animate(i):
     return lines, text
 
 # Margins from the right and top window edge
-plt.subplots_adjust(right=0.66, top=0.8, left=0.2)
+plt.subplots_adjust(right=0.8, top=0.8, left=0.2)
 # Create animation
 ani = animation.FuncAnimation(fig, animate, frames=frames, interval=1000/60)
 
@@ -143,5 +210,9 @@ fig.figimage(image, xo=fig.bbox.xmax/2 - image.shape[1]/2, yo=fig.bbox.ymax - im
 
 # Save the animation
 ani.save('GraphRaw.mp4', fps=60, extra_args=['-vcodec', 'libx264', '-b:v', '10M'])
+
+#print(milestones)
+#print(conDown)
+#print(conUp)
 
 #plt.show()
