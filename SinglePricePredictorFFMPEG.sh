@@ -22,8 +22,8 @@ ffmpeg -f lavfi -y -i color=c='D5D5D5':s=1080x40:d=8.3334 -vf "drawtext=text='Pr
 # Overlay the above 2 Images
 ffmpeg -loop 1 -y -i TextVideoName.png -i TextVideoEnd.png -filter_complex "[0:v][1:v]overlay=0:60" -t 8.3334 -r 60 TextVideoTitle.mp4
 
-# Scale GraphRaw.mp4 down to 1080x1680 then overlay it onto solidColour.mp4 at 0x210, then overlay TextVideoTitle.mp4 onto that video at 0x370, then overlay CounterRaw.mp4 onto that video at 830x240
-ffmpeg -y -i whiteBackground.mp4 -i GraphRaw.mp4 -i TextVideoTitle.mp4 -i CounterRaw.mp4 -filter_complex "[1:v]scale=1080:1680[graph];[0:v][graph]overlay=0:210[graphAndBG];[graphAndBG][2:v]overlay=0:435[graphBGandTitle];[graphBGandTitle][3:v]overlay=800:240" -r 60 MainVideo.mp4
+# Scale GraphRaw.mp4 down to 1080x1680 then overlay it onto solidColour.mp4 at 0x170, then overlay TextVideoTitle.mp4 onto that video at 0x390, then overlay CounterRaw.mp4 onto that video at 830x200
+ffmpeg -y -i whiteBackground.mp4 -i GraphRaw.mp4 -i TextVideoTitle.mp4 -i CounterRaw.mp4 -filter_complex "[1:v]scale=1080:1680[graph];[0:v][graph]overlay=0:170[graphAndBG];[graphAndBG][2:v]overlay=0:390[graphBGandTitle];[graphBGandTitle][3:v]overlay=800:200" -r 60 MainVideo.mp4
 
 # Get the last frame of the MainVideo.mp4
 ffmpeg -sseof -3 -y -i MainVideo.mp4 -update 1 -q:v 1 LastFrame.png

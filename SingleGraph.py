@@ -163,7 +163,7 @@ def animate(i):
         # tracks whether or not a similar point was saved
         savedCon = False
         # Check if next and last frame had a higher value, if so this is Concave Up
-        if y3_interp[i-1] >= y3_interp[i] + 2 and y3_interp[i+1] >= y3_interp[i] + 2:
+        if y3_interp[i-1] >= y3_interp[i] + 3 and y3_interp[i+1] >= y3_interp[i] + 3:
             # Check if this point is too close to another similar point
             for point in conUp:
                 if point[0] + conXLimit > x_interp[i] and point[1] + conYLimit - 1 >= y3_interp[i] and point[1] - conYLimit + 1 <= y3_interp[i]:
@@ -174,7 +174,7 @@ def animate(i):
             if not savedCon:
                 conUp.append([x_interp[i], y3_interp[i]])
         # Check if next and last frame had a higher value, if so this is Concave Down
-        elif y3_interp[i-1] <= y3_interp[i] + 2 and y3_interp[i+1] <= y3_interp[i] + 2:
+        elif y3_interp[i-1] <= y3_interp[i] + 3 and y3_interp[i+1] <= y3_interp[i] + 3:
             # Same as above
             for point in conDown:
                 if point[0] + conXLimit > x_interp[i] and point[1] + conYLimit - 1 >= y3_interp[i] and point[1] - conYLimit + 1 <= y3_interp[i]:
@@ -185,15 +185,19 @@ def animate(i):
                 conDown.append([x_interp[i], y3_interp[i]])
     
     for point in conDown:
-        ax.text(point[0], point[1], " $" + str(round(point[1])), fontsize=14, color='green', fontweight='bold')
+        formatPoint = f"{round(point[1]):,}"
+        ax.text(point[0], point[1], " $" + formatPoint, fontsize=15, color='green', fontweight='bold')
         ax.scatter(point[0], point[1], color='green', s=30, zorder=5)
 
     for point in conUp:
-        ax.text(point[0], point[1], " $" + str(round(point[1])), fontsize=14, color='red', fontweight='bold')
+        formatPoint = f"{round(point[1]):,}"
+        ax.text(point[0], point[1], " $" + formatPoint, fontsize=15, color='red', fontweight='bold')
         ax.scatter(point[0], point[1], color='red', s=30, zorder=5)
 
+    formatCurrentPrice = f"{round(y3_interp[i]):,}"
+
     # Text annotations for each line
-    text = ax.text(startingYear, 0, car + "\n" + "$" + str(round(y3_interp[i])), fontsize=14, color='#000', fontweight='bold')
+    text = ax.text(startingYear, 0, car + "\n" + "$" + formatCurrentPrice, fontsize=16, color='#000', fontweight='bold')
 
     if i > 0:
         text.set_position((x_interp[i], y3_interp[i-1]))
