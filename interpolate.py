@@ -32,12 +32,12 @@ frames = 500
 
 car1ImageName = ''
 car2ImageName = ''
-car3ImageName = 'Audi RS'
+car3ImageName = 'Aston Martin'
 
 # Shorter names to fit on the graph
 car1GraphName = ''
 car2GraphName = ''
-car3GraphName = 'Audi RS7'
+car3GraphName = 'Vantage'
 
 # Not used here but still used in multiple files
 car1 = '' # Place Holder

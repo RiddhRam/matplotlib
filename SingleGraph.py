@@ -37,7 +37,7 @@ y3_interp = read_csv_file('y3_interp.csv', False, 2)
 # Manual set maximumY
 #maximumY = 33000
 
-# Automatically set maximumY 1.5k above the highest price
+# Automatically set maximumY 1.8k above the highest price
 maximumY = max(y3_interp) + 1800
 
 startingYear = read_csv_file('startingYear.csv', False, 1)
