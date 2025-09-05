@@ -17,7 +17,7 @@ Make sure to change the name of the vehicles in the csv.
 In interpolate.py, change the logo values to the names of the according vehicle logo file names in the Logos folder
 
 Run interpolate.py
-Either run SingleGraph.py or ComparisonGraph.py depending on how many vehicles
+Either run SingleGraph.py or ComparisonGraph.py depending on how many vehicles (SingleGraph.py for 1, ComparisonGraph.py for more than 1)
 Then run counter.py
 If running ComparisonGraph.py then run legend.py as well
 
@@ -30,5 +30,3 @@ Then run LastFrameMaker.py
 
 Then import MainVideo.mp4 and LastFrameFinal.mp4 into CapCut
 Trim first few frames from MainVideo.mp4 up until the second year shows and the axes look normal
-
-There may be a template already made in CapCut and all you have to do it export it
